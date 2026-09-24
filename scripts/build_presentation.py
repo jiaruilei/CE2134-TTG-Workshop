@@ -124,4 +124,11 @@ with zipfile.ZipFile(source_file) as source:
 </body></html>
 ''', encoding="utf-8", newline="\n")
 (ROOT / "slides" / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
+# Bust cached controls/styles when this deck replaces an older published version.
+page = ROOT / "index.html"
+content = page.read_text(encoding="utf-8")
+for asset in ("styles.css", "presentation.js"):
+    version = hashlib.sha256((ROOT / asset).read_bytes()).hexdigest()[:12]
+    content = content.replace(f'"{asset}"', f'"{asset}?v={version}"')
+page.write_text(content, encoding="utf-8", newline="\n")
 print(f"Built {len(sections)} slides from {source_file.name}")
