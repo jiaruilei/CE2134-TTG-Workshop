@@ -1,0 +1,11 @@
+{
+  "repository": "https://github.com/jiaruilei/hydrostatic_pressure",
+  "commit": "0b830b1b635a6d767441e1f26b4791d2f882aa78",
+  "frontendFile": "index.html",
+  "frontendRawSha256": "cb09e00caa191fe346840f239e61d0647966f77d8d287731a2e23fd271831109",
+  "frontendSha256": "051f1c7f712511060f087abd6eb3b258a594e851ac06114ee775b73d61c1f796",
+  "ruleBasedCoachReplySha256": "1d5aa3507df013e7416275162c1fdf653e0f9d53512c839ee638460e6beffba4",
+  "pressureContextFunctionsSha256": "40dbda88d361437c5283125115f813b91345fc92c7ba631d69db3f779b24ca25",
+  "hashing": "UTF-8 with LF newlines; function sections trim surrounding whitespace",
+  "upstreamLicense": "No LICENSE file or package license field is present at the pinned upstream commit."
+}
