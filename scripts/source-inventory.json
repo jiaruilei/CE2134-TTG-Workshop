@@ -1,0 +1,2074 @@
+{
+  "source": "CE2134_TTG.pptx",
+  "slide_count": 11,
+  "size_emu": {
+    "cx": "12192000",
+    "cy": "6858000"
+  },
+  "slides": [
+    {
+      "number": 1,
+      "path": "ppt/slides/slide1.xml",
+      "text": "AI‑Assisted Interactive Games / Interactive Platforms\nfor CE2134\nFluid Mechanics\nthe digital component of my integrated experiential learning \nAssistant Professor Lei Jiarui, Gary\nCivil and Environmental Engineering\nNational University of Singapore",
+      "shapes": [
+        {
+          "type": "pic",
+          "id": "2",
+          "name": "Image 0",
+          "text": "",
+          "box": {
+            "x": 3048000,
+            "y": 0,
+            "cx": 9144000,
+            "cy": 6858000,
+            "pct": {
+              "x": 25.0,
+              "y": 0.0,
+              "w": 75.0,
+              "h": 100.0
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": []
+        },
+        {
+          "type": "sp",
+          "id": "3",
+          "name": "Shape 0",
+          "text": "",
+          "box": {
+            "x": 0,
+            "y": 0,
+            "cx": 6099048,
+            "cy": 6858000,
+            "pct": {
+              "x": 0.0,
+              "y": 0.0,
+              "w": 50.025,
+              "h": 100.0
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": []
+        },
+        {
+          "type": "sp",
+          "id": "4",
+          "name": "TextBox 3",
+          "text": "AI‑Assisted Interactive Games / Interactive Platforms\nfor CE2134\nFluid Mechanics\nthe digital component of my integrated experiential learning ",
+          "box": {
+            "x": 658368,
+            "y": 868680,
+            "cx": 5120640,
+            "cy": 4213118,
+            "pct": {
+              "x": 5.4,
+              "y": 12.666666666666668,
+              "w": 42.0,
+              "h": 61.433624963546215
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": [
+            "AI‑Assisted Interactive Games / Interactive Platforms",
+            "for CE2134",
+            "Fluid Mechanics",
+            "the digital component of my integrated experiential learning "
+          ]
+        },
+        {
+          "type": "sp",
+          "id": "6",
+          "name": "TextBox 5",
+          "text": "Assistant Professor Lei Jiarui, Gary\nCivil and Environmental Engineering\nNational University of Singapore",
+          "box": {
+            "x": 658368,
+            "y": 5178903,
+            "cx": 4800600,
+            "cy": 1066449,
+            "pct": {
+              "x": 5.4,
+              "y": 75.51622922134733,
+              "w": 39.375,
+              "h": 15.550437445319334
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": [
+            "Assistant Professor Lei Jiarui, Gary",
+            "Civil and Environmental Engineering",
+            "National University of Singapore"
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "Id": "rId3",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image",
+          "Target": "../media/image1.JPG"
+        },
+        {
+          "Id": "rId2",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/notesSlide",
+          "Target": "../notesSlides/notesSlide1.xml"
+        },
+        {
+          "Id": "rId1",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideLayout",
+          "Target": "../slideLayouts/slideLayout1.xml"
+        }
+      ],
+      "has_timing": false,
+      "transition": null,
+      "paragraphs": [
+        "AI‑Assisted Interactive Games / Interactive Platforms",
+        "for CE2134",
+        "Fluid Mechanics",
+        "the digital component of my integrated experiential learning ",
+        "Assistant Professor Lei Jiarui, Gary",
+        "Civil and Environmental Engineering",
+        "National University of Singapore"
+      ]
+    },
+    {
+      "number": 2,
+      "path": "ppt/slides/slide2.xml",
+      "text": "Motivation & My Approach\n2\nExperiential learning!\nPhysical + Digital\n(2022 onwards)\n(2025 onwards)",
+      "shapes": [
+        {
+          "type": "sp",
+          "id": "2",
+          "name": "Title 1",
+          "text": "Motivation & My Approach",
+          "box": null,
+          "placeholder": {
+            "type": "title"
+          },
+          "links": [],
+          "paragraphs": [
+            "Motivation & My Approach"
+          ]
+        },
+        {
+          "type": "graphicFrame",
+          "id": "11",
+          "name": "Content Placeholder 2",
+          "text": "",
+          "box": {
+            "x": 838201,
+            "y": 1825625,
+            "cx": 3936999,
+            "cy": 4351338,
+            "pct": {
+              "x": 6.875008202099737,
+              "y": 26.620370370370374,
+              "w": 32.29165846456693,
+              "h": 63.4490813648294
+            }
+          },
+          "placeholder": {
+            "idx": "1"
+          },
+          "links": [],
+          "paragraphs": []
+        },
+        {
+          "type": "sp",
+          "id": "4",
+          "name": "Slide Number Placeholder 3",
+          "text": "2",
+          "box": null,
+          "placeholder": {
+            "type": "sldNum",
+            "sz": "quarter",
+            "idx": "12"
+          },
+          "links": [],
+          "paragraphs": [
+            "2"
+          ]
+        },
+        {
+          "type": "sp",
+          "id": "8",
+          "name": "Arrow: Right 7",
+          "text": "",
+          "box": {
+            "x": 5449613,
+            "y": 3701743,
+            "cx": 1292773,
+            "cy": 763051,
+            "pct": {
+              "x": 44.69826935695538,
+              "y": 53.97700495771362,
+              "w": 10.603453083989502,
+              "h": 11.126436278798483
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": []
+        },
+        {
+          "type": "sp",
+          "id": "10",
+          "name": "TextBox 9",
+          "text": "Experiential learning!\nPhysical + Digital",
+          "box": {
+            "x": 7416799,
+            "y": 2558727,
+            "cx": 4120055,
+            "cy": 2554545,
+            "pct": {
+              "x": 60.83332513123359,
+              "y": 37.31010498687664,
+              "w": 33.793102034120736,
+              "h": 37.24912510936133
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": [
+            "Experiential learning!",
+            "Physical + Digital"
+          ]
+        },
+        {
+          "type": "sp",
+          "id": "3",
+          "name": "TextBox 2",
+          "text": "(2022 onwards)",
+          "box": {
+            "x": 7677052,
+            "y": 5117550,
+            "cx": 1799774,
+            "cy": 369332,
+            "pct": {
+              "x": 62.96794619422572,
+              "y": 74.62160979877515,
+              "w": 14.761925853018374,
+              "h": 5.385418489355497
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": [
+            "(2022 onwards)"
+          ]
+        },
+        {
+          "type": "sp",
+          "id": "6",
+          "name": "TextBox 5",
+          "text": "(2025 onwards)",
+          "box": {
+            "x": 9913433,
+            "y": 5118979,
+            "cx": 1799774,
+            "cy": 369332,
+            "pct": {
+              "x": 81.31096620734908,
+              "y": 74.64244677748614,
+              "w": 14.761925853018374,
+              "h": 5.385418489355497
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": [
+            "(2025 onwards)"
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "Id": "rId3",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/diagramData",
+          "Target": "../diagrams/data1.xml"
+        },
+        {
+          "Id": "rId7",
+          "Type": "http://schemas.microsoft.com/office/2007/relationships/diagramDrawing",
+          "Target": "../diagrams/drawing1.xml"
+        },
+        {
+          "Id": "rId2",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/notesSlide",
+          "Target": "../notesSlides/notesSlide2.xml"
+        },
+        {
+          "Id": "rId1",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideLayout",
+          "Target": "../slideLayouts/slideLayout3.xml"
+        },
+        {
+          "Id": "rId6",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/diagramColors",
+          "Target": "../diagrams/colors1.xml"
+        },
+        {
+          "Id": "rId5",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/diagramQuickStyle",
+          "Target": "../diagrams/quickStyle1.xml"
+        },
+        {
+          "Id": "rId4",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/diagramLayout",
+          "Target": "../diagrams/layout1.xml"
+        }
+      ],
+      "has_timing": true,
+      "transition": null,
+      "paragraphs": [
+        "Motivation & My Approach",
+        "2",
+        "Experiential learning!",
+        "Physical + Digital",
+        "(2022 onwards)",
+        "(2025 onwards)"
+      ],
+      "diagram_paragraphs": [
+        "",
+        "Many students can do routine calculations, but struggle to see what the equation means physically.",
+        "",
+        "",
+        "Students often get feedback too late.",
+        "",
+        "",
+        ""
+      ],
+      "animation_steps": [
+        [
+          "11"
+        ],
+        [
+          "8",
+          "10"
+        ]
+      ]
+    },
+    {
+      "number": 3,
+      "path": "ppt/slides/slide3.xml",
+      "text": "3",
+      "shapes": [
+        {
+          "type": "sp",
+          "id": "4",
+          "name": "Slide Number Placeholder 3",
+          "text": "3",
+          "box": null,
+          "placeholder": {
+            "type": "sldNum",
+            "sz": "quarter",
+            "idx": "12"
+          },
+          "links": [],
+          "paragraphs": [
+            "3"
+          ]
+        },
+        {
+          "type": "pic",
+          "id": "9",
+          "name": "Picture 8",
+          "text": "",
+          "box": {
+            "x": 241047,
+            "y": 239339,
+            "cx": 3202418,
+            "cy": 4268223,
+            "pct": {
+              "x": 1.9770915354330707,
+              "y": 3.4899241761446484,
+              "w": 26.26655183727034,
+              "h": 62.23713910761155
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": []
+        },
+        {
+          "type": "pic",
+          "id": "12",
+          "name": "Picture 11",
+          "text": "",
+          "box": {
+            "x": 3573729,
+            "y": 239339,
+            "cx": 4271291,
+            "cy": 2669557,
+            "pct": {
+              "x": 29.312081692913385,
+              "y": 3.4899241761446484,
+              "w": 35.033554790026244,
+              "h": 38.92617381160689
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": []
+        },
+        {
+          "type": "pic",
+          "id": "20",
+          "name": "Picture 19",
+          "text": "",
+          "box": {
+            "x": 241047,
+            "y": 4618051,
+            "cx": 3202821,
+            "cy": 1816394,
+            "pct": {
+              "x": 1.9770915354330707,
+              "y": 67.33815981335667,
+              "w": 26.269857283464564,
+              "h": 26.48576844561096
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": []
+        },
+        {
+          "type": "pic",
+          "id": "22",
+          "name": "Picture 21",
+          "text": "",
+          "box": {
+            "x": 3573729,
+            "y": 3050423,
+            "cx": 5990810,
+            "cy": 3384022,
+            "pct": {
+              "x": 29.312081692913385,
+              "y": 44.47977544473608,
+              "w": 49.13722112860893,
+              "h": 49.344152814231556
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": []
+        },
+        {
+          "type": "pic",
+          "id": "24",
+          "name": "Picture 23",
+          "text": "",
+          "box": {
+            "x": 7975284,
+            "y": 239338,
+            "cx": 4493807,
+            "cy": 2669557,
+            "pct": {
+              "x": 65.4140748031496,
+              "y": 3.4899095946340037,
+              "w": 36.8586532152231,
+              "h": 38.92617381160689
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": []
+        },
+        {
+          "type": "pic",
+          "id": "26",
+          "name": "Picture 25",
+          "text": "",
+          "box": {
+            "x": 9694400,
+            "y": 3050422,
+            "cx": 2902841,
+            "cy": 1457139,
+            "pct": {
+              "x": 79.51443569553805,
+              "y": 44.47976086322543,
+              "w": 23.809391404199477,
+              "h": 21.247287839020125
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": []
+        },
+        {
+          "type": "pic",
+          "id": "28",
+          "name": "Picture 27",
+          "text": "",
+          "box": {
+            "x": 9694400,
+            "y": 4618051,
+            "cx": 2603488,
+            "cy": 1816394,
+            "pct": {
+              "x": 79.51443569553805,
+              "y": 67.33815981335667,
+              "w": 21.354068241469818,
+              "h": 26.48576844561096
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": []
+        }
+      ],
+      "relationships": [
+        {
+          "Id": "rId8",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image",
+          "Target": "../media/image7.PNG"
+        },
+        {
+          "Id": "rId3",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image",
+          "Target": "../media/image2.jfif"
+        },
+        {
+          "Id": "rId7",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image",
+          "Target": "../media/image6.png"
+        },
+        {
+          "Id": "rId2",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/notesSlide",
+          "Target": "../notesSlides/notesSlide3.xml"
+        },
+        {
+          "Id": "rId1",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideLayout",
+          "Target": "../slideLayouts/slideLayout3.xml"
+        },
+        {
+          "Id": "rId6",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image",
+          "Target": "../media/image5.png"
+        },
+        {
+          "Id": "rId5",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image",
+          "Target": "../media/image4.PNG"
+        },
+        {
+          "Id": "rId4",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image",
+          "Target": "../media/image3.PNG"
+        },
+        {
+          "Id": "rId9",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image",
+          "Target": "../media/image8.PNG"
+        }
+      ],
+      "has_timing": false,
+      "transition": null,
+      "paragraphs": [
+        "3"
+      ]
+    },
+    {
+      "number": 4,
+      "path": "ppt/slides/slide4.xml",
+      "text": "Experiential learning: Digital\n4\nSee the physics with interactive platforms\nImmediate feedback\nhttps://jiaruilei.github.io/WaveAttenuationNbS_2/ ",
+      "shapes": [
+        {
+          "type": "sp",
+          "id": "2",
+          "name": "Title 1",
+          "text": "Experiential learning: Digital",
+          "box": {
+            "x": 841248,
+            "y": 365760,
+            "cx": 10515600,
+            "cy": 1325880,
+            "pct": {
+              "x": 6.9,
+              "y": 5.333333333333334,
+              "w": 86.25,
+              "h": 19.333333333333332
+            }
+          },
+          "placeholder": {
+            "type": "title"
+          },
+          "links": [],
+          "paragraphs": [
+            "Experiential learning: Digital"
+          ]
+        },
+        {
+          "type": "sp",
+          "id": "3",
+          "name": "Slide Number Placeholder",
+          "text": "4",
+          "box": null,
+          "placeholder": {
+            "type": "sldNum",
+            "sz": "quarter",
+            "idx": "12"
+          },
+          "links": [],
+          "paragraphs": [
+            "4"
+          ]
+        },
+        {
+          "type": "sp",
+          "id": "5",
+          "name": "Pale-blue rounded text panel",
+          "text": "",
+          "box": {
+            "x": 841248,
+            "y": 1828800,
+            "cx": 3941063,
+            "cy": 3236976,
+            "pct": {
+              "x": 6.9,
+              "y": 26.666666666666668,
+              "w": 32.32499179790026,
+              "h": 47.199999999999996
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": []
+        },
+        {
+          "type": "sp",
+          "id": "6",
+          "name": "TextBox 5",
+          "text": "See the physics with interactive platforms",
+          "box": {
+            "x": 1091373,
+            "y": 2163728,
+            "cx": 3502152,
+            "cy": 966917,
+            "pct": {
+              "x": 8.951550196850395,
+              "y": 31.55042286380869,
+              "w": 28.725,
+              "h": 14.099110527850685
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": [
+            "See the physics with interactive platforms"
+          ]
+        },
+        {
+          "type": "sp",
+          "id": "21",
+          "name": "TextBox 20",
+          "text": "Immediate feedback",
+          "box": {
+            "x": 1091373,
+            "y": 3883435,
+            "cx": 3502152,
+            "cy": 768096,
+            "pct": {
+              "x": 8.951550196850395,
+              "y": 56.626348789734614,
+              "w": 28.725,
+              "h": 11.200000000000001
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": [
+            "Immediate feedback"
+          ]
+        },
+        {
+          "type": "sp",
+          "id": "7",
+          "name": "TextBox 6",
+          "text": "https://jiaruilei.github.io/WaveAttenuationNbS_2/ ",
+          "box": {
+            "x": 6315739,
+            "y": 3262622,
+            "cx": 5160335,
+            "cy": 369332,
+            "pct": {
+              "x": 51.80232119422572,
+              "y": 47.573957421988915,
+              "w": 42.325582349081365,
+              "h": 5.385418489355497
+            }
+          },
+          "placeholder": null,
+          "links": [
+            {
+              "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id": "rId3",
+              "relationship": {
+                "Id": "rId3",
+                "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink",
+                "Target": "https://jiaruilei.github.io/WaveAttenuationNbS_2/",
+                "TargetMode": "External"
+              }
+            }
+          ],
+          "paragraphs": [
+            "https://jiaruilei.github.io/WaveAttenuationNbS_2/ "
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "Id": "rId3",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink",
+          "Target": "https://jiaruilei.github.io/WaveAttenuationNbS_2/",
+          "TargetMode": "External"
+        },
+        {
+          "Id": "rId2",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/notesSlide",
+          "Target": "../notesSlides/notesSlide4.xml"
+        },
+        {
+          "Id": "rId1",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideLayout",
+          "Target": "../slideLayouts/slideLayout7.xml"
+        }
+      ],
+      "has_timing": false,
+      "transition": null,
+      "paragraphs": [
+        "Experiential learning: Digital",
+        "4",
+        "See the physics with interactive platforms",
+        "Immediate feedback",
+        "https://jiaruilei.github.io/WaveAttenuationNbS_2/ "
+      ],
+      "suggested_embed_pct": {
+        "x": 42.0,
+        "y": 26.666667,
+        "w": 51.15,
+        "h": 64.0
+      }
+    },
+    {
+      "number": 5,
+      "path": "ppt/slides/slide5.xml",
+      "text": "Three CE2134 assignments in AY2026/27 Sem 1\n5\nPSet 1 — AI Coach vs. Rule-based replies\n109 assessable submissions\nAI coach vs rule-based replies (A/B tests)\nPSet 2 — Confidence improvement\n47 confidence pairs / 106 submissions\nSame assignment in both groups\nPSet 3 — Quantifying learning with recorded webpage interaction and quiz outcomes\n109 students\n320+ submissions analysed",
+      "shapes": [
+        {
+          "type": "sp",
+          "id": "2",
+          "name": "Title 1",
+          "text": "Three CE2134 assignments in AY2026/27 Sem 1",
+          "box": {
+            "x": 841247,
+            "y": 365760,
+            "cx": 11215285,
+            "cy": 1325880,
+            "pct": {
+              "x": 6.899991797900262,
+              "y": 5.333333333333334,
+              "w": 91.98888615485565,
+              "h": 19.333333333333332
+            }
+          },
+          "placeholder": {
+            "type": "title"
+          },
+          "links": [],
+          "paragraphs": [
+            "Three CE2134 assignments in AY2026/27 Sem 1"
+          ]
+        },
+        {
+          "type": "sp",
+          "id": "3",
+          "name": "Slide Number Placeholder",
+          "text": "5",
+          "box": null,
+          "placeholder": {
+            "type": "sldNum",
+            "sz": "quarter",
+            "idx": "12"
+          },
+          "links": [],
+          "paragraphs": [
+            "5"
+          ]
+        },
+        {
+          "type": "sp",
+          "id": "10",
+          "name": "TextBox 9",
+          "text": "PSet 1 — AI Coach vs. Rule-based replies",
+          "box": {
+            "x": 5202936,
+            "y": 1892807,
+            "cx": 6126480,
+            "cy": 393192,
+            "pct": {
+              "x": 42.675000000000004,
+              "y": 27.599985418489354,
+              "w": 50.24999999999999,
+              "h": 5.733333333333333
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": [
+            "PSet 1 — AI Coach vs. Rule-based replies"
+          ]
+        },
+        {
+          "type": "sp",
+          "id": "11",
+          "name": "TextBox 10",
+          "text": "109 assessable submissions",
+          "box": {
+            "x": 5202936,
+            "y": 2331720,
+            "cx": 6126480,
+            "cy": 402336,
+            "pct": {
+              "x": 42.675000000000004,
+              "y": 34.0,
+              "w": 50.24999999999999,
+              "h": 5.866666666666666
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": [
+            "109 assessable submissions"
+          ]
+        },
+        {
+          "type": "sp",
+          "id": "12",
+          "name": "TextBox 11",
+          "text": "AI coach vs rule-based replies (A/B tests)",
+          "box": {
+            "x": 5202936,
+            "y": 2798063,
+            "cx": 6853596,
+            "cy": 402336,
+            "pct": {
+              "x": 42.675000000000004,
+              "y": 40.79998541848936,
+              "w": 56.21387795275591,
+              "h": 5.866666666666666
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": [
+            "AI coach vs rule-based replies (A/B tests)"
+          ]
+        },
+        {
+          "type": "sp",
+          "id": "13",
+          "name": "TextBox 12",
+          "text": "PSet 2 — Confidence improvement",
+          "box": {
+            "x": 5202936,
+            "y": 3310128,
+            "cx": 6126480,
+            "cy": 393192,
+            "pct": {
+              "x": 42.675000000000004,
+              "y": 48.266666666666666,
+              "w": 50.24999999999999,
+              "h": 5.733333333333333
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": [
+            "PSet 2 — Confidence improvement"
+          ]
+        },
+        {
+          "type": "sp",
+          "id": "14",
+          "name": "TextBox 13",
+          "text": "47 confidence pairs / 106 submissions",
+          "box": {
+            "x": 5202936,
+            "y": 3749039,
+            "cx": 6126480,
+            "cy": 402336,
+            "pct": {
+              "x": 42.675000000000004,
+              "y": 54.66665208515602,
+              "w": 50.24999999999999,
+              "h": 5.866666666666666
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": [
+            "47 confidence pairs / 106 submissions"
+          ]
+        },
+        {
+          "type": "sp",
+          "id": "15",
+          "name": "TextBox 14",
+          "text": "Same assignment in both groups",
+          "box": {
+            "x": 5202936,
+            "y": 4215384,
+            "cx": 6126480,
+            "cy": 402336,
+            "pct": {
+              "x": 42.675000000000004,
+              "y": 61.46666666666667,
+              "w": 50.24999999999999,
+              "h": 5.866666666666666
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": [
+            "Same assignment in both groups"
+          ]
+        },
+        {
+          "type": "sp",
+          "id": "16",
+          "name": "TextBox 15",
+          "text": "PSet 3 — Quantifying learning with recorded webpage interaction and quiz outcomes",
+          "box": {
+            "x": 5202936,
+            "y": 4727447,
+            "cx": 6853596,
+            "cy": 879221,
+            "pct": {
+              "x": 42.675000000000004,
+              "y": 68.9333187518227,
+              "w": 56.21387795275591,
+              "h": 12.820370370370371
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": [
+            "PSet 3 — Quantifying learning with recorded webpage interaction and quiz outcomes"
+          ]
+        },
+        {
+          "type": "sp",
+          "id": "20",
+          "name": "Pale-blue rounded text panel",
+          "text": "",
+          "box": {
+            "x": 841248,
+            "y": 1828800,
+            "cx": 3941063,
+            "cy": 3236976,
+            "pct": {
+              "x": 6.9,
+              "y": 26.666666666666668,
+              "w": 32.32499179790026,
+              "h": 47.199999999999996
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": []
+        },
+        {
+          "type": "sp",
+          "id": "22",
+          "name": "TextBox 21",
+          "text": "109 students",
+          "box": {
+            "x": 1091373,
+            "y": 2163728,
+            "cx": 3502152,
+            "cy": 966917,
+            "pct": {
+              "x": 8.951550196850395,
+              "y": 31.55042286380869,
+              "w": 28.725,
+              "h": 14.099110527850685
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": [
+            "109 students"
+          ]
+        },
+        {
+          "type": "sp",
+          "id": "24",
+          "name": "TextBox 23",
+          "text": "320+ submissions analysed",
+          "box": {
+            "x": 1091373,
+            "y": 3883435,
+            "cx": 3502152,
+            "cy": 768096,
+            "pct": {
+              "x": 8.951550196850395,
+              "y": 56.626348789734614,
+              "w": 28.725,
+              "h": 11.200000000000001
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": [
+            "320+ submissions analysed"
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "Id": "rId2",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/notesSlide",
+          "Target": "../notesSlides/notesSlide5.xml"
+        },
+        {
+          "Id": "rId1",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideLayout",
+          "Target": "../slideLayouts/slideLayout7.xml"
+        }
+      ],
+      "has_timing": false,
+      "transition": null,
+      "paragraphs": [
+        "Three CE2134 assignments in AY2026/27 Sem 1",
+        "5",
+        "PSet 1 — AI Coach vs. Rule-based replies",
+        "109 assessable submissions",
+        "AI coach vs rule-based replies (A/B tests)",
+        "PSet 2 — Confidence improvement",
+        "47 confidence pairs / 106 submissions",
+        "Same assignment in both groups",
+        "PSet 3 — Quantifying learning with recorded webpage interaction and quiz outcomes",
+        "109 students",
+        "320+ submissions analysed"
+      ]
+    },
+    {
+      "number": 6,
+      "path": "ppt/slides/slide6.xml",
+      "text": "PSet 1 A/B test: AI vs rule-based support\n6\nhttps://hydrostatic-pressure.onrender.com/study/a/PlVZ63vpbIY95IDhImg8hg\nhttps://hydrostatic-pressure.onrender.com/study/b/fjd479fQILU0IXeMCvQLfA ",
+      "shapes": [
+        {
+          "type": "sp",
+          "id": "2",
+          "name": "Title 1",
+          "text": "PSet 1 A/B test: AI vs rule-based support",
+          "box": {
+            "x": 841248,
+            "y": 405384,
+            "cx": 10515600,
+            "cy": 1325880,
+            "pct": {
+              "x": 6.9,
+              "y": 5.911111111111111,
+              "w": 86.25,
+              "h": 19.333333333333332
+            }
+          },
+          "placeholder": {
+            "type": "title"
+          },
+          "links": [],
+          "paragraphs": [
+            "PSet 1 A/B test: AI vs rule-based support"
+          ]
+        },
+        {
+          "type": "sp",
+          "id": "3",
+          "name": "Slide Number Placeholder",
+          "text": "6",
+          "box": null,
+          "placeholder": {
+            "type": "sldNum",
+            "sz": "quarter",
+            "idx": "12"
+          },
+          "links": [],
+          "paragraphs": [
+            "6"
+          ]
+        },
+        {
+          "type": "sp",
+          "id": "14",
+          "name": "TextBox 13",
+          "text": "https://hydrostatic-pressure.onrender.com/study/a/PlVZ63vpbIY95IDhImg8hg",
+          "box": {
+            "x": 1,
+            "y": 3021167,
+            "cx": 5969000,
+            "cy": 646331,
+            "pct": {
+              "x": 8.202099737532808E-06,
+              "y": 44.0531787693205,
+              "w": 48.95833333333333,
+              "h": 9.42448235637212
+            }
+          },
+          "placeholder": null,
+          "links": [
+            {
+              "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id": "rId3",
+              "tooltip": "https://hydrostatic-pressure.onrender.com/study/a/PlVZ63vpbIY95IDhImg8hg",
+              "relationship": {
+                "Id": "rId3",
+                "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink",
+                "Target": "https://hydrostatic-pressure.onrender.com/study/a/PlVZ63vpbIY95IDhImg8hg",
+                "TargetMode": "External"
+              }
+            }
+          ],
+          "paragraphs": [
+            "https://hydrostatic-pressure.onrender.com/study/a/PlVZ63vpbIY95IDhImg8hg"
+          ]
+        },
+        {
+          "type": "sp",
+          "id": "16",
+          "name": "TextBox 15",
+          "text": "https://hydrostatic-pressure.onrender.com/study/b/fjd479fQILU0IXeMCvQLfA ",
+          "box": {
+            "x": 6096000,
+            "y": 3021168,
+            "cx": 6096000,
+            "cy": 646331,
+            "pct": {
+              "x": 50.0,
+              "y": 44.053193350831144,
+              "w": 50.0,
+              "h": 9.42448235637212
+            }
+          },
+          "placeholder": null,
+          "links": [
+            {
+              "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id": "rId4",
+              "relationship": {
+                "Id": "rId4",
+                "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink",
+                "Target": "https://hydrostatic-pressure.onrender.com/study/b/fjd479fQILU0IXeMCvQLfA",
+                "TargetMode": "External"
+              }
+            }
+          ],
+          "paragraphs": [
+            "https://hydrostatic-pressure.onrender.com/study/b/fjd479fQILU0IXeMCvQLfA "
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "Id": "rId3",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink",
+          "Target": "https://hydrostatic-pressure.onrender.com/study/a/PlVZ63vpbIY95IDhImg8hg",
+          "TargetMode": "External"
+        },
+        {
+          "Id": "rId2",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/notesSlide",
+          "Target": "../notesSlides/notesSlide6.xml"
+        },
+        {
+          "Id": "rId1",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideLayout",
+          "Target": "../slideLayouts/slideLayout7.xml"
+        },
+        {
+          "Id": "rId4",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink",
+          "Target": "https://hydrostatic-pressure.onrender.com/study/b/fjd479fQILU0IXeMCvQLfA",
+          "TargetMode": "External"
+        }
+      ],
+      "has_timing": false,
+      "transition": null,
+      "paragraphs": [
+        "PSet 1 A/B test: AI vs rule-based support",
+        "6",
+        "https://hydrostatic-pressure.onrender.com/study/a/PlVZ63vpbIY95IDhImg8hg",
+        "https://hydrostatic-pressure.onrender.com/study/b/fjd479fQILU0IXeMCvQLfA "
+      ],
+      "suggested_embed_pct": {
+        "x": 6.9,
+        "y": 26.666667,
+        "w": 86.25,
+        "h": 64.0
+      }
+    },
+    {
+      "number": 7,
+      "path": "ppt/slides/slide7.xml",
+      "text": "PSet 1 A/B test: AI vs rule-based support\n7\nObserved outcome\nA: API-connected AI\nB: rule-based chat\nOff-topic/nonsense counts\nNone identified (0/55)\n12/54 (22.2%)\nMean confidence change on a 1-5 scale\n+0.20 (n = 45)\n-0.03 (n = 49)\nStudents reporting lower confidence\n8/45 (17.8%)\n14/49 (28.6%)\nAPI-connected AI coach showed fewer reported relevance problems.\nDifference in confidence change (A - B): +0.23\nConfidence change did not differ significantly between A and B (Welch’s t-test, p value = 0.238).\n45 and 49 paired confidence levels for A & B, respectively",
+      "shapes": [
+        {
+          "type": "sp",
+          "id": "2",
+          "name": "Title 1",
+          "text": "PSet 1 A/B test: AI vs rule-based support",
+          "box": {
+            "x": 841248,
+            "y": 365760,
+            "cx": 10515600,
+            "cy": 1325880,
+            "pct": {
+              "x": 6.9,
+              "y": 5.333333333333334,
+              "w": 86.25,
+              "h": 19.333333333333332
+            }
+          },
+          "placeholder": {
+            "type": "title"
+          },
+          "links": [],
+          "paragraphs": [
+            "PSet 1 A/B test: AI vs rule-based support"
+          ]
+        },
+        {
+          "type": "sp",
+          "id": "3",
+          "name": "Slide Number Placeholder",
+          "text": "7",
+          "box": null,
+          "placeholder": {
+            "type": "sldNum",
+            "sz": "quarter",
+            "idx": "12"
+          },
+          "links": [],
+          "paragraphs": [
+            "7"
+          ]
+        },
+        {
+          "type": "pic",
+          "id": "15",
+          "name": "Picture 14",
+          "text": "",
+          "box": {
+            "x": 2110117,
+            "y": 1470804,
+            "cx": 8122067,
+            "cy": 635033,
+            "pct": {
+              "x": 17.307390091863518,
+              "y": 21.446544181977252,
+              "w": 66.61800360892389,
+              "h": 9.259740449110527
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": []
+        },
+        {
+          "type": "pic",
+          "id": "17",
+          "name": "Picture 16",
+          "text": "",
+          "box": {
+            "x": 2185268,
+            "y": 2283924,
+            "cx": 7683895,
+            "cy": 520727,
+            "pct": {
+              "x": 17.923786089238845,
+              "y": 33.30306211723534,
+              "w": 63.02407316272966,
+              "h": 7.592986293379994
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": []
+        },
+        {
+          "type": "graphicFrame",
+          "id": "20",
+          "name": "Table 19",
+          "text": "Observed outcome\nA: API-connected AI\nB: rule-based chat\nOff-topic/nonsense counts\nNone identified (0/55)\n12/54 (22.2%)\nMean confidence change on a 1-5 scale\n+0.20 (n = 45)\n-0.03 (n = 49)\nStudents reporting lower confidence\n8/45 (17.8%)\n14/49 (28.6%)",
+          "box": {
+            "x": 1226184,
+            "y": 3001871,
+            "cx": 9739632,
+            "cy": 2371248,
+            "pct": {
+              "x": 10.057283464566929,
+              "y": 43.77181393992417,
+              "w": 79.88543307086614,
+              "h": 34.576377952755905
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": [
+            "Observed outcome",
+            "A: API-connected AI",
+            "B: rule-based chat",
+            "Off-topic/nonsense counts",
+            "None identified (0/55)",
+            "12/54 (22.2%)",
+            "Mean confidence change on a 1-5 scale",
+            "+0.20 (n = 45)",
+            "-0.03 (n = 49)",
+            "Students reporting lower confidence",
+            "8/45 (17.8%)",
+            "14/49 (28.6%)"
+          ]
+        },
+        {
+          "type": "sp",
+          "id": "22",
+          "name": "TextBox 21",
+          "text": "API-connected AI coach showed fewer reported relevance problems.\nDifference in confidence change (A - B): +0.23\nConfidence change did not differ significantly between A and B (Welch’s t-test, p value = 0.238).",
+          "box": {
+            "x": 1226183,
+            "y": 5523484,
+            "cx": 10804949,
+            "cy": 923330,
+            "pct": {
+              "x": 10.057275262467192,
+              "y": 80.54074074074074,
+              "w": 88.62326935695538,
+              "h": 13.463546223388741
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": [
+            "API-connected AI coach showed fewer reported relevance problems.",
+            "Difference in confidence change (A - B): +0.23",
+            "Confidence change did not differ significantly between A and B (Welch’s t-test, p value = 0.238)."
+          ]
+        },
+        {
+          "type": "sp",
+          "id": "5",
+          "name": "TextBox 4",
+          "text": "45 and 49 paired confidence levels for A & B, respectively",
+          "box": {
+            "x": 10381593,
+            "y": 1374178,
+            "cx": 1715813,
+            "cy": 1477328,
+            "pct": {
+              "x": 85.15086122047244,
+              "y": 20.03759113444153,
+              "w": 14.07326935695538,
+              "h": 21.541673957421988
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": [
+            "45 and 49 paired confidence levels for A & B, respectively"
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "Id": "rId3",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image",
+          "Target": "../media/image9.png"
+        },
+        {
+          "Id": "rId2",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/notesSlide",
+          "Target": "../notesSlides/notesSlide7.xml"
+        },
+        {
+          "Id": "rId1",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideLayout",
+          "Target": "../slideLayouts/slideLayout7.xml"
+        },
+        {
+          "Id": "rId4",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image",
+          "Target": "../media/image10.png"
+        }
+      ],
+      "has_timing": false,
+      "transition": null,
+      "paragraphs": [
+        "PSet 1 A/B test: AI vs rule-based support",
+        "7",
+        "Observed outcome",
+        "A: API-connected AI",
+        "B: rule-based chat",
+        "Off-topic/nonsense counts",
+        "None identified (0/55)",
+        "12/54 (22.2%)",
+        "Mean confidence change on a 1-5 scale",
+        "+0.20 (n = 45)",
+        "-0.03 (n = 49)",
+        "Students reporting lower confidence",
+        "8/45 (17.8%)",
+        "14/49 (28.6%)",
+        "API-connected AI coach showed fewer reported relevance problems.",
+        "Difference in confidence change (A - B): +0.23",
+        "Confidence change did not differ significantly between A and B (Welch’s t-test, p value = 0.238).",
+        "45 and 49 paired confidence levels for A & B, respectively"
+      ]
+    },
+    {
+      "number": 8,
+      "path": "ppt/slides/slide8.xml",
+      "text": "PSet 2 Confidence gain with AI support\n8\nhttps://hydrostatic-force-surfaces.onrender.com",
+      "shapes": [
+        {
+          "type": "sp",
+          "id": "2",
+          "name": "Title 1",
+          "text": "PSet 2 Confidence gain with AI support",
+          "box": {
+            "x": 841248,
+            "y": 405384,
+            "cx": 11604752,
+            "cy": 1325880,
+            "pct": {
+              "x": 6.9,
+              "y": 5.911111111111111,
+              "w": 95.18333333333334,
+              "h": 19.333333333333332
+            }
+          },
+          "placeholder": {
+            "type": "title"
+          },
+          "links": [],
+          "paragraphs": [
+            "PSet 2 Confidence gain with AI support"
+          ]
+        },
+        {
+          "type": "sp",
+          "id": "3",
+          "name": "Slide Number Placeholder",
+          "text": "8",
+          "box": null,
+          "placeholder": {
+            "type": "sldNum",
+            "sz": "quarter",
+            "idx": "12"
+          },
+          "links": [],
+          "paragraphs": [
+            "8"
+          ]
+        },
+        {
+          "type": "sp",
+          "id": "5",
+          "name": "TextBox 4",
+          "text": "https://hydrostatic-force-surfaces.onrender.com",
+          "box": {
+            "x": 3458634,
+            "y": 1989708,
+            "cx": 6223000,
+            "cy": 253916,
+            "pct": {
+              "x": 28.368061023622047,
+              "y": 29.01294838145232,
+              "w": 51.041666666666664,
+              "h": 3.7024788568095657
+            }
+          },
+          "placeholder": null,
+          "links": [
+            {
+              "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id": "rId3",
+              "relationship": {
+                "Id": "rId3",
+                "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink",
+                "Target": "https://hydrostatic-force-surfaces.onrender.com/",
+                "TargetMode": "External"
+              }
+            }
+          ],
+          "paragraphs": [
+            "https://hydrostatic-force-surfaces.onrender.com"
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "Id": "rId3",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink",
+          "Target": "https://hydrostatic-force-surfaces.onrender.com/",
+          "TargetMode": "External"
+        },
+        {
+          "Id": "rId2",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/notesSlide",
+          "Target": "../notesSlides/notesSlide8.xml"
+        },
+        {
+          "Id": "rId1",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideLayout",
+          "Target": "../slideLayouts/slideLayout7.xml"
+        }
+      ],
+      "has_timing": false,
+      "transition": null,
+      "paragraphs": [
+        "PSet 2 Confidence gain with AI support",
+        "8",
+        "https://hydrostatic-force-surfaces.onrender.com"
+      ],
+      "suggested_embed_pct": {
+        "x": 6.9,
+        "y": 26.666667,
+        "w": 86.25,
+        "h": 64.0
+      }
+    },
+    {
+      "number": 9,
+      "path": "ppt/slides/slide9.xml",
+      "text": "PSet 2 Confidence gain with AI support\n9\nConfidence outcome\nResults\nMean confidence on a 1-5 scale\n4.06 before AI-coach usage, 4.37 after\nMean confidence change on a 1-5 scale\n+0.31 (n = 47)\nDirection of confidence change\n19 higher, 23 unchanged, 5 lower\nConfidence increases outnumbered decreases (p value = 0.0033, statistically significant).\nPSet 2 shows confidence gain alongside AI use for conceptual clarification\n47 paired confidence levels",
+      "shapes": [
+        {
+          "type": "pic",
+          "id": "5",
+          "name": "Picture 4",
+          "text": "",
+          "box": {
+            "x": 2509653,
+            "y": 1424374,
+            "cx": 7172694,
+            "cy": 777280,
+            "pct": {
+              "x": 20.584424212598424,
+              "y": 20.76952464275299,
+              "w": 58.83115157480315,
+              "h": 11.333916593759113
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": []
+        },
+        {
+          "type": "sp",
+          "id": "2",
+          "name": "Title 1",
+          "text": "PSet 2 Confidence gain with AI support",
+          "box": {
+            "x": 841248,
+            "y": 365760,
+            "cx": 10515600,
+            "cy": 1325880,
+            "pct": {
+              "x": 6.9,
+              "y": 5.333333333333334,
+              "w": 86.25,
+              "h": 19.333333333333332
+            }
+          },
+          "placeholder": {
+            "type": "title"
+          },
+          "links": [],
+          "paragraphs": [
+            "PSet 2 Confidence gain with AI support"
+          ]
+        },
+        {
+          "type": "sp",
+          "id": "3",
+          "name": "Slide Number Placeholder",
+          "text": "9",
+          "box": null,
+          "placeholder": {
+            "type": "sldNum",
+            "sz": "quarter",
+            "idx": "12"
+          },
+          "links": [],
+          "paragraphs": [
+            "9"
+          ]
+        },
+        {
+          "type": "graphicFrame",
+          "id": "20",
+          "name": "Table 19",
+          "text": "Confidence outcome\nResults\nMean confidence on a 1-5 scale\n4.06 before AI-coach usage, 4.37 after\nMean confidence change on a 1-5 scale\n+0.31 (n = 47)\nDirection of confidence change\n19 higher, 23 unchanged, 5 lower",
+          "box": {
+            "x": 1226183,
+            "y": 3484474,
+            "cx": 9687350,
+            "cy": 2182176,
+            "pct": {
+              "x": 10.057275262467192,
+              "y": 50.80889472149315,
+              "w": 79.45661089238844,
+              "h": 31.81942257217848
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": [
+            "Confidence outcome",
+            "Results",
+            "Mean confidence on a 1-5 scale",
+            "4.06 before AI-coach usage, 4.37 after",
+            "Mean confidence change on a 1-5 scale",
+            "+0.31 (n = 47)",
+            "Direction of confidence change",
+            "19 higher, 23 unchanged, 5 lower"
+          ]
+        },
+        {
+          "type": "sp",
+          "id": "22",
+          "name": "TextBox 21",
+          "text": "Confidence increases outnumbered decreases (p value = 0.0033, statistically significant).\nPSet 2 shows confidence gain alongside AI use for conceptual clarification",
+          "box": {
+            "x": 1226183,
+            "y": 5853684,
+            "cx": 10804949,
+            "cy": 646331,
+            "pct": {
+              "x": 10.057275262467192,
+              "y": 85.35555555555555,
+              "w": 88.62326935695538,
+              "h": 9.42448235637212
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": [
+            "Confidence increases outnumbered decreases (p value = 0.0033, statistically significant).",
+            "PSet 2 shows confidence gain alongside AI use for conceptual clarification"
+          ]
+        },
+        {
+          "type": "pic",
+          "id": "7",
+          "name": "Picture 6",
+          "text": "",
+          "box": {
+            "x": 2464758,
+            "y": 2257573,
+            "cx": 7378444,
+            "cy": 1045899,
+            "pct": {
+              "x": 20.21619094488189,
+              "y": 32.91882473024205,
+              "w": 60.51873359580052,
+              "h": 15.250787401574803
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": []
+        },
+        {
+          "type": "sp",
+          "id": "6",
+          "name": "TextBox 5",
+          "text": "47 paired confidence levels",
+          "box": {
+            "x": 10397359,
+            "y": 1864739,
+            "cx": 1363718,
+            "cy": 923330,
+            "pct": {
+              "x": 85.28017552493439,
+              "y": 27.19071157771945,
+              "w": 11.185351049868766,
+              "h": 13.463546223388741
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": [
+            "47 paired confidence levels"
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "Id": "rId3",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image",
+          "Target": "../media/image11.png"
+        },
+        {
+          "Id": "rId2",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/notesSlide",
+          "Target": "../notesSlides/notesSlide9.xml"
+        },
+        {
+          "Id": "rId1",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideLayout",
+          "Target": "../slideLayouts/slideLayout7.xml"
+        },
+        {
+          "Id": "rId4",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image",
+          "Target": "../media/image12.png"
+        }
+      ],
+      "has_timing": false,
+      "transition": null,
+      "paragraphs": [
+        "PSet 2 Confidence gain with AI support",
+        "9",
+        "Confidence outcome",
+        "Results",
+        "Mean confidence on a 1-5 scale",
+        "4.06 before AI-coach usage, 4.37 after",
+        "Mean confidence change on a 1-5 scale",
+        "+0.31 (n = 47)",
+        "Direction of confidence change",
+        "19 higher, 23 unchanged, 5 lower",
+        "Confidence increases outnumbered decreases (p value = 0.0033, statistically significant).",
+        "PSet 2 shows confidence gain alongside AI use for conceptual clarification",
+        "47 paired confidence levels"
+      ]
+    },
+    {
+      "number": 10,
+      "path": "ppt/slides/slide10.xml",
+      "text": "PSet 3 AI learning support beyond confidence\n10\nhttps://bernoulli-pipe-hgl-egl.onrender.com/",
+      "shapes": [
+        {
+          "type": "sp",
+          "id": "2",
+          "name": "Title 1",
+          "text": "PSet 3 AI learning support beyond confidence",
+          "box": {
+            "x": 841247,
+            "y": 365760,
+            "cx": 11179959,
+            "cy": 1325880,
+            "pct": {
+              "x": 6.899991797900262,
+              "y": 5.333333333333334,
+              "w": 91.69913877952756,
+              "h": 19.333333333333332
+            }
+          },
+          "placeholder": {
+            "type": "title"
+          },
+          "links": [],
+          "paragraphs": [
+            "PSet 3 AI learning support beyond confidence"
+          ]
+        },
+        {
+          "type": "sp",
+          "id": "3",
+          "name": "Slide Number Placeholder",
+          "text": "10",
+          "box": null,
+          "placeholder": {
+            "type": "sldNum",
+            "sz": "quarter",
+            "idx": "12"
+          },
+          "links": [],
+          "paragraphs": [
+            "10"
+          ]
+        },
+        {
+          "type": "sp",
+          "id": "21",
+          "name": "Rectangle 20",
+          "text": "",
+          "box": {
+            "x": 5193792,
+            "y": 2295144,
+            "cx": 6181344,
+            "cy": 448056,
+            "pct": {
+              "x": 42.6,
+              "y": 33.46666666666667,
+              "w": 50.7,
+              "h": 6.533333333333332
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": []
+        },
+        {
+          "type": "sp",
+          "id": "44",
+          "name": "TextBox 43",
+          "text": "https://bernoulli-pipe-hgl-egl.onrender.com/",
+          "box": {
+            "x": 3663512,
+            "y": 2042062,
+            "cx": 6097314,
+            "cy": 253916,
+            "pct": {
+              "x": 30.048490813648293,
+              "y": 29.77634878973462,
+              "w": 50.01077755905512,
+              "h": 3.7024788568095657
+            }
+          },
+          "placeholder": null,
+          "links": [
+            {
+              "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id": "rId3",
+              "relationship": {
+                "Id": "rId3",
+                "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink",
+                "Target": "https://bernoulli-pipe-hgl-egl.onrender.com/",
+                "TargetMode": "External"
+              }
+            }
+          ],
+          "paragraphs": [
+            "https://bernoulli-pipe-hgl-egl.onrender.com/"
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "Id": "rId3",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink",
+          "Target": "https://bernoulli-pipe-hgl-egl.onrender.com/",
+          "TargetMode": "External"
+        },
+        {
+          "Id": "rId2",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/notesSlide",
+          "Target": "../notesSlides/notesSlide10.xml"
+        },
+        {
+          "Id": "rId1",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideLayout",
+          "Target": "../slideLayouts/slideLayout7.xml"
+        }
+      ],
+      "has_timing": false,
+      "transition": null,
+      "paragraphs": [
+        "PSet 3 AI learning support beyond confidence",
+        "10",
+        "https://bernoulli-pipe-hgl-egl.onrender.com/"
+      ],
+      "suggested_embed_pct": {
+        "x": 6.9,
+        "y": 26.666667,
+        "w": 86.25,
+        "h": 64.0
+      }
+    },
+    {
+      "number": 11,
+      "path": "ppt/slides/slide11.xml",
+      "text": "PSet 3 AI learning support beyond confidence\n11\nLearning support\nEvidence from the chat logs\nConceptual help\n60.7% of IDs (37/61) asked at least one concept, reasoning or equation question.\nRepeated engagement\n54.1% of IDs (33/61) had two or more recorded AI exchanges.\nReasoning follow-ups\nAt least 14.8% of IDs (9/61) probed earlier explanations in 13 manually reviewed follow-up questions. \nFor example, a user corrected velocity from 1.2 to 2.7 m/s and pressure from 125.5 to 122.575 kPa. \n144 exchanges across 61 anonymous IDs",
+      "shapes": [
+        {
+          "type": "sp",
+          "id": "2",
+          "name": "Title 1",
+          "text": "PSet 3 AI learning support beyond confidence",
+          "box": {
+            "x": 841248,
+            "y": 365760,
+            "cx": 11424324,
+            "cy": 1325880,
+            "pct": {
+              "x": 6.9,
+              "y": 5.333333333333334,
+              "w": 93.70344488188977,
+              "h": 19.333333333333332
+            }
+          },
+          "placeholder": {
+            "type": "title"
+          },
+          "links": [],
+          "paragraphs": [
+            "PSet 3 AI learning support beyond confidence"
+          ]
+        },
+        {
+          "type": "sp",
+          "id": "3",
+          "name": "Slide Number Placeholder",
+          "text": "11",
+          "box": null,
+          "placeholder": {
+            "type": "sldNum",
+            "sz": "quarter",
+            "idx": "12"
+          },
+          "links": [],
+          "paragraphs": [
+            "11"
+          ]
+        },
+        {
+          "type": "pic",
+          "id": "23",
+          "name": "Picture 22",
+          "text": "",
+          "box": {
+            "x": 3891181,
+            "y": 1376010,
+            "cx": 4409638,
+            "cy": 2052990,
+            "pct": {
+              "x": 31.915854658792654,
+              "y": 20.064304461942257,
+              "w": 36.1682906824147,
+              "h": 29.935695538057743
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": []
+        },
+        {
+          "type": "graphicFrame",
+          "id": "5",
+          "name": "Table 4",
+          "text": "Learning support\nEvidence from the chat logs\nConceptual help\n60.7% of IDs (37/61) asked at least one concept, reasoning or equation question.\nRepeated engagement\n54.1% of IDs (33/61) had two or more recorded AI exchanges.\nReasoning follow-ups\nAt least 14.8% of IDs (9/61) probed earlier explanations in 13 manually reviewed follow-up questions. ",
+          "box": {
+            "x": 1252325,
+            "y": 3539653,
+            "cx": 9687350,
+            "cy": 2740104,
+            "pct": {
+              "x": 10.271694553805775,
+              "y": 51.61348789734617,
+              "w": 79.45661089238844,
+              "h": 39.95485564304462
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": [
+            "Learning support",
+            "Evidence from the chat logs",
+            "Conceptual help",
+            "60.7% of IDs (37/61) asked at least one concept, reasoning or equation question.",
+            "Repeated engagement",
+            "54.1% of IDs (33/61) had two or more recorded AI exchanges.",
+            "Reasoning follow-ups",
+            "At least 14.8% of IDs (9/61) probed earlier explanations in 13 manually reviewed follow-up questions. "
+          ]
+        },
+        {
+          "type": "sp",
+          "id": "7",
+          "name": "TextBox 6",
+          "text": "For example, a user corrected velocity from 1.2 to 2.7 m/s and pressure from 125.5 to 122.575 kPa. ",
+          "box": {
+            "x": 1226183,
+            "y": 6318770,
+            "cx": 11126100,
+            "cy": 369332,
+            "pct": {
+              "x": 10.057275262467192,
+              "y": 92.13721201516478,
+              "w": 91.25738188976378,
+              "h": 5.385418489355497
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": [
+            "For example, a user corrected velocity from 1.2 to 2.7 m/s and pressure from 125.5 to 122.575 kPa. "
+          ]
+        },
+        {
+          "type": "sp",
+          "id": "8",
+          "name": "TextBox 7",
+          "text": "144 exchanges across 61 anonymous IDs",
+          "box": {
+            "x": 8768255,
+            "y": 2079339,
+            "cx": 2488324,
+            "cy": 646331,
+            "pct": {
+              "x": 71.91810203412074,
+              "y": 30.31990376202975,
+              "w": 20.40948162729659,
+              "h": 9.42448235637212
+            }
+          },
+          "placeholder": null,
+          "links": [],
+          "paragraphs": [
+            "144 exchanges across 61 anonymous IDs"
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "Id": "rId3",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image",
+          "Target": "../media/image13.png"
+        },
+        {
+          "Id": "rId2",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/notesSlide",
+          "Target": "../notesSlides/notesSlide11.xml"
+        },
+        {
+          "Id": "rId1",
+          "Type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideLayout",
+          "Target": "../slideLayouts/slideLayout7.xml"
+        }
+      ],
+      "has_timing": false,
+      "transition": null,
+      "paragraphs": [
+        "PSet 3 AI learning support beyond confidence",
+        "11",
+        "Learning support",
+        "Evidence from the chat logs",
+        "Conceptual help",
+        "60.7% of IDs (37/61) asked at least one concept, reasoning or equation question.",
+        "Repeated engagement",
+        "54.1% of IDs (33/61) had two or more recorded AI exchanges.",
+        "Reasoning follow-ups",
+        "At least 14.8% of IDs (9/61) probed earlier explanations in 13 manually reviewed follow-up questions. ",
+        "For example, a user corrected velocity from 1.2 to 2.7 m/s and pressure from 125.5 to 122.575 kPa. ",
+        "144 exchanges across 61 anonymous IDs"
+      ]
+    }
+  ],
+  "media_files": [
+    "ppt/media/image1.JPG",
+    "ppt/media/image2.jfif",
+    "ppt/media/image4.PNG",
+    "ppt/media/image5.png",
+    "ppt/media/image6.png",
+    "ppt/media/image7.PNG",
+    "ppt/media/image8.PNG",
+    "ppt/media/image11.png",
+    "ppt/media/image12.png",
+    "ppt/media/image3.PNG",
+    "ppt/media/image9.png",
+    "ppt/media/image13.png",
+    "ppt/media/image10.png"
+  ]
+}

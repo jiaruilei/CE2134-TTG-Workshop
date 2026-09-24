@@ -1,0 +1,112 @@
+{
+  "source": "CE2134_TTG.pptx",
+  "sha256": "3a80e447467aacd89151c03587595e6d8824cb998407d32797a08925a661393b",
+  "slides": [
+    {
+      "number": 1,
+      "title": "AI‑Assisted Interactive Games / Interactive Platforms",
+      "image": "slides/slide-01.png",
+      "websites": [],
+      "sourceWebsites": [],
+      "imageSha256": "ef2b97a79276d0433f9dda7c3583c8a350d75fb73174fba886e04f909ea9b26a"
+    },
+    {
+      "number": 2,
+      "title": "Motivation & My Approach",
+      "image": "slides/slide-02.png",
+      "websites": [],
+      "sourceWebsites": [],
+      "imageSha256": "5f09474ef85790cbf6c000ce01b96d238442f264f1fd267e19a9bda76234239b"
+    },
+    {
+      "number": 3,
+      "title": "Experiential learning: Physical",
+      "image": "slides/slide-03.png",
+      "websites": [],
+      "sourceWebsites": [],
+      "imageSha256": "685e252a8999b3dc7b8c3468bdf36b346977c6b0ebc0006c567d0ac062ee7da8"
+    },
+    {
+      "number": 4,
+      "title": "Experiential learning: Digital",
+      "image": "slides/slide-04.png",
+      "websites": [
+        "https://jiaruilei.github.io/WaveAttenuationNbS_2/"
+      ],
+      "sourceWebsites": [
+        "https://jiaruilei.github.io/WaveAttenuationNbS_2/"
+      ],
+      "imageSha256": "25c33ec5c28f2d50d16376968e4f5b01d4584e7d5102019c809085a8bf16c2ba"
+    },
+    {
+      "number": 5,
+      "title": "Three CE2134 assignments in AY2026/27 Sem 1",
+      "image": "slides/slide-05.png",
+      "websites": [],
+      "sourceWebsites": [],
+      "imageSha256": "3129e66d369b291f1abeb607c277c452de97ca0f98714ff98b038bd73495f153"
+    },
+    {
+      "number": 6,
+      "title": "PSet 1 A/B test: AI vs rule-based support",
+      "image": "slides/slide-06.png",
+      "websites": [
+        "https://hydrostatic-pressure.onrender.com/study/a/PlVZ63vpbIY95IDhImg8hg",
+        "https://ce2134-ttg-pressure-b.onrender.com/"
+      ],
+      "sourceWebsites": [
+        "https://hydrostatic-pressure.onrender.com/study/a/PlVZ63vpbIY95IDhImg8hg",
+        "https://hydrostatic-pressure.onrender.com/study/b/fjd479fQILU0IXeMCvQLfA"
+      ],
+      "imageSha256": "491e385afe8eba67a9759f9eacef198226e309cd94df8669415c645f05e5ed28"
+    },
+    {
+      "number": 7,
+      "title": "PSet 1 A/B test: AI vs rule-based support",
+      "image": "slides/slide-07.png",
+      "websites": [],
+      "sourceWebsites": [],
+      "imageSha256": "19421f6cb7871dd1d5df2d15497465d9ad7eeabdd5a7a7cf7a2a1b30b19fca70"
+    },
+    {
+      "number": 8,
+      "title": "PSet 2 Confidence gain with AI support",
+      "image": "slides/slide-08.png",
+      "websites": [
+        "https://hydrostatic-force-surfaces.onrender.com/"
+      ],
+      "sourceWebsites": [
+        "https://hydrostatic-force-surfaces.onrender.com/"
+      ],
+      "imageSha256": "63236e134e20a173f1ddafb7d2d99560a2fae5c7818a4316d008d68fa6e58ad2"
+    },
+    {
+      "number": 9,
+      "title": "PSet 2 Confidence gain with AI support",
+      "image": "slides/slide-09.png",
+      "websites": [],
+      "sourceWebsites": [],
+      "imageSha256": "43d5eace19b0de6aa38f98064e462968529d5941c2fc91840ef5ca6867183921"
+    },
+    {
+      "number": 10,
+      "title": "PSet 3 AI learning support beyond confidence",
+      "image": "slides/slide-10.png",
+      "websites": [
+        "https://bernoulli-pipe-hgl-egl.onrender.com/"
+      ],
+      "sourceWebsites": [
+        "https://bernoulli-pipe-hgl-egl.onrender.com/"
+      ],
+      "imageSha256": "779008d4bf3c54166fd4872e3c6b9cf874b95fd2a0d28071c671a41d0b22f770"
+    },
+    {
+      "number": 11,
+      "title": "PSet 3 AI learning support beyond confidence",
+      "image": "slides/slide-11.png",
+      "websites": [],
+      "sourceWebsites": [],
+      "imageSha256": "25db2c1e63a3f14600453b0aec2fe8056a14f71a589d9e7ef4ccbabba0886eb4"
+    }
+  ]
+}
