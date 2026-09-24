@@ -1,6 +1,6 @@
 {
   "source": "CE2134_TTG.pptx",
-  "sha256": "3a80e447467aacd89151c03587595e6d8824cb998407d32797a08925a661393b",
+  "sha256": "7cbddb492536d7169c2012e8c712f279776c9aa2d5b96c66e399e0bc58820a03",
   "slides": [
     {
       "number": 1,
@@ -41,10 +41,11 @@
     {
       "number": 5,
       "title": "Three CE2134 assignments in AY2026/27 Sem 1",
-      "image": "slides/slide-05.png",
+      "content": "custom/slide-05.html",
+      "contentSha256": "2274191cb3cde1ea8ae4ad8e077daf78c2e20c6fa01d1532945162082bd4af6b",
       "websites": [],
       "sourceWebsites": [],
-      "imageSha256": "3129e66d369b291f1abeb607c277c452de97ca0f98714ff98b038bd73495f153"
+      "sourceImage": "slides/slide-05.png"
     },
     {
       "number": 6,
@@ -107,6 +108,14 @@
       "websites": [],
       "sourceWebsites": [],
       "imageSha256": "25db2c1e63a3f14600453b0aec2fe8056a14f71a589d9e7ef4ccbabba0886eb4"
+    },
+    {
+      "number": 12,
+      "title": "AI in my experiential learning",
+      "content": "custom/slide-12.html",
+      "contentSha256": "54b10d47b37bfef3be2d4a614cc6ee3213073a115486d6f422a1a60bec6a3a96",
+      "websites": [],
+      "sourceWebsites": []
     }
   ]
 }

@@ -17,6 +17,8 @@ inventory_file, export_dir, source_file = map(Path, sys.argv[1:])
 inventory = json.loads(inventory_file.read_text(encoding="utf-8-sig"))
 overrides_path = ROOT / "scripts" / "website-overrides.json"
 overrides = json.loads(overrides_path.read_text(encoding="utf-8")) if overrides_path.exists() else {}
+slide_overrides_path = ROOT / "scripts" / "slide-overrides.json"
+slide_overrides = json.loads(slide_overrides_path.read_text(encoding="utf-8")) if slide_overrides_path.exists() else {}
 (ROOT / "slides").mkdir(exist_ok=True)
 esc = html.escape
 ns = {"a": "http://schemas.openxmlformats.org/drawingml/2006/main",
@@ -26,25 +28,45 @@ manifest = {"source": source_file.name,
             "sha256": hashlib.sha256(source_file.read_bytes()).hexdigest(),
             "slides": []}
 
+def copy_asset(source_path, destination_path):
+    if source_path.resolve() != destination_path.resolve():
+        shutil.copyfile(source_path, destination_path)
+
+def authored_slide(number, revision):
+    title = revision["title"]
+    content_path = ROOT / revision["content"]
+    content = content_path.read_text(encoding="utf-8")
+    notes = esc(revision.get("notes", ""))
+    sections.append(f'<section id="slide-{number}" data-title="{esc(title)}" aria-label="Slide {number}: {esc(title)}">\n{content}\n<aside class="notes">{notes}</aside>\n</section>')
+    record = {"number": number, "title": title, "content": revision["content"],
+              "contentSha256": hashlib.sha256(content_path.read_bytes()).hexdigest(),
+              "websites": [], "sourceWebsites": []}
+    if number <= inventory["slide_count"]:
+        record["sourceImage"] = f"slides/slide-{number:02}.png"
+    manifest["slides"].append(record)
+
 with zipfile.ZipFile(source_file) as source:
     for slide in inventory["slides"]:
         number = slide["number"]
         title = slide["paragraphs"][0] if number != 3 else "Experiential learning: Physical"
         picture = f"slides/slide-{number:02}.png"
-        shutil.copyfile(export_dir / Path(picture).name, ROOT / picture)
+        copy_asset(export_dir / Path(picture).name, ROOT / picture)
+        if str(number) in slide_overrides:
+            authored_slide(number, slide_overrides[str(number)])
+            continue
         paragraphs = slide["paragraphs"] + slide.get("diagram_paragraphs", [])
         transcript = " ".join(p for p in paragraphs if p and p != str(number))
         image = f'<img class="source-slide" src="{picture}" alt="{esc(transcript)}" draggable="false">'
         if number == 6:
             web_picture = "slides/slide-06-web.png"
-            shutil.copyfile(export_dir / Path(web_picture).name, ROOT / web_picture)
+            copy_asset(export_dir / Path(web_picture).name, ROOT / web_picture)
             image = (f'<img class="source-slide screen-slide" src="{web_picture}" alt="{esc(transcript)}" draggable="false">'
                      f'<img class="source-slide print-slide" src="{picture}" alt="{esc(transcript)}" draggable="false">')
         if number == 2:
             builds = []
             for step in range(2):
                 build = f"slides/slide-02-build-{step}.png"
-                shutil.copyfile(export_dir / Path(build).name, ROOT / build)
+                copy_asset(export_dir / Path(build).name, ROOT / build)
                 builds.append(build)
             image = (f'<img class="source-slide" src="{builds[0]}" alt="{esc(title)}" draggable="false">'
                      f'<img class="source-slide fragment" data-fragment-index="0" src="{builds[1]}" alt="{esc(" ".join(slide.get("diagram_paragraphs", [])))}" draggable="false">'
@@ -95,6 +117,9 @@ with zipfile.ZipFile(source_file) as source:
                                    "websites": links, "sourceWebsites": source_links,
                                    "imageSha256": hashlib.sha256((ROOT / picture).read_bytes()).hexdigest()})
 
+for number in sorted(int(key) for key in slide_overrides if int(key) > inventory["slide_count"]):
+    authored_slide(number, slide_overrides[str(number)])
+
 (ROOT / "index.html").write_text('''<!doctype html>
 <html lang="en">
 <head>
@@ -112,7 +137,7 @@ with zipfile.ZipFile(source_file) as source:
 </div></main>
 <nav class="deck-controls" aria-label="Presentation controls">
   <button id="previous" aria-label="Previous slide or reveal" title="Previous (Left arrow)">‹</button>
-  <span id="counter" aria-live="polite">1 / 11</span>
+  <span id="counter" aria-live="polite">1 / TOTAL_SLIDES</span>
   <button id="next" aria-label="Next slide or reveal" title="Next (Right arrow)">›</button>
   <span class="divider"></span>
   <button id="overview" title="Slide overview (O)">Overview</button>
@@ -127,7 +152,8 @@ with zipfile.ZipFile(source_file) as source:
 # Bust cached controls/styles when this deck replaces an older published version.
 page = ROOT / "index.html"
 content = page.read_text(encoding="utf-8")
-for asset in ("styles.css", "presentation.js"):
+content = content.replace("TOTAL_SLIDES", str(len(sections)))
+for asset in ("styles.css", "presentation.js", "slides/slide-02-build-0.png", "slides/slide-02-build-1.png"):
     version = hashlib.sha256((ROOT / asset).read_bytes()).hexdigest()[:12]
     content = content.replace(f'"{asset}"', f'"{asset}?v={version}"')
 page.write_text(content, encoding="utf-8", newline="\n")
