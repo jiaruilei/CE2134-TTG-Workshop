@@ -49,8 +49,8 @@ body { background: #151e2c; color: #fff; font-family: Arial, sans-serif; }
 .approach-integrated { top: 192px; height: 207px; background: #d2e4f5; }
 .approach-continuing { top: 440px; height: 209px; background: #d2e4f5; }
 .reveal .approach-panel p { font-size: 32px; line-height: 1.25; }
-.approach-arrow { position: absolute; left: 570px; top: 387px; width: 140px; height: 87px; background: #092b3a; clip-path: polygon(0 25%,68% 25%,68% 0,100% 50%,68% 100%,68% 75%,0 75%); }
-.approach-arrow > div { position: absolute; inset: 5px; background: #156082; clip-path: polygon(0 25%,68% 25%,68% 0,100% 50%,68% 100%,68% 75%,0 75%); }
+/* Reuse page 2's original arrow at the identical slide coordinates and scale. */
+.approach-arrow { position: absolute; left: 560px; top: 375px; width: 160px; height: 110px; background: url("slides/slide-02.png") -560px -375px / 1280px 720px no-repeat; }
 .approach-outcome { position: absolute; left: 788px; top: 230px; width: 450px; }
 .reveal .approach-outcome > p { font-size: 53.333333px; line-height: 1.2; }
 .reveal .approach-outcome .physical-digital { margin-top: 36px; font-style: italic; white-space: nowrap; }
