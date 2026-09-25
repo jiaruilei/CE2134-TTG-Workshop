@@ -35,6 +35,9 @@ body { background: #151e2c; color: #fff; font-family: Arial, sans-serif; }
 #notice { position: fixed; bottom: 64px; left: 50%; transform: translateX(-50%); z-index: 60; padding: 12px 18px; max-width: 80vw; background: var(--navy); border-radius: 6px; font: 15px/1.4 Arial, sans-serif; }
 .reveal .authored-slide { position: absolute; inset: 0; color: #000; font: 32px/1.25 Arial, sans-serif; }
 .reveal .authored-slide p, .reveal .authored-slide h1, .reveal .authored-slide h2 { margin: 0; font-family: Arial, sans-serif; text-transform: none; letter-spacing: normal; }
+/* Replace only the cover title; the remaining original artwork stays intact. */
+.cover-title-background { position: absolute; left: 60px; top: 90px; width: 550px; height: 305px; background: #13294b; }
+.reveal .cover-title-revision .cover-main-title { position: absolute; left: 69.12px; top: 91.2px; width: 537.6px; color: #ed7d31; font-size: 48px; line-height: 60.9px; font-weight: 400; }
 .reveal .authored-slide .slide-heading { position: absolute; left: 97.92px; top: 77px; width: 1170px; font-size: 52px; line-height: 1.15; font-weight: 400; white-space: nowrap; }
 .reveal .original-page { position: absolute; right: 96px; bottom: 25px; color: #777; font: 16px/1 Arial, sans-serif; }
 .cohort-panel { position: absolute; left: 88.32px; top: 210px; width: 338px; height: 384px; padding: 40px 26px; border-radius: 44px; background: #d2e4f5; display: flex; flex-direction: column; justify-content: space-between; }

@@ -4,11 +4,12 @@
   "slides": [
     {
       "number": 1,
-      "title": "AI‑Assisted Interactive Games / Interactive Platforms",
-      "image": "slides/slide-01.png",
+      "title": "AI-integrated Interactive Platforms for CE2134 Fluid Mechanics",
+      "content": "custom/slide-01.html",
+      "contentSha256": "cddb801eafa28b116218e95df81203b13be8ff2211fcf4daaaae3e7146386cf3",
       "websites": [],
       "sourceWebsites": [],
-      "imageSha256": "ef2b97a79276d0433f9dda7c3583c8a350d75fb73174fba886e04f909ea9b26a"
+      "sourceImage": "slides/slide-01.png"
     },
     {
       "number": 2,
