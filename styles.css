@@ -47,16 +47,18 @@ body { background: #151e2c; color: #fff; font-family: Arial, sans-serif; }
 .reveal .assignment-row p { font-size: 32px; line-height: 1.25; }
 .reveal .closing-summary .slide-heading { font-size: 56px; }
 .approach-panel { position: absolute; left: 88.32px; width: 413.76px; padding: 30px 20px; border-radius: 36px; display: flex; align-items: center; }
-.approach-integrated { top: 192px; height: 207px; background: #ffe082; }
+.approach-integrated { top: 192px; height: 207px; background: #d2e4f5; }
 .approach-continuing { top: 440px; height: 209px; background: #d2e4f5; }
 .reveal .approach-panel p { font-size: 32px; line-height: 1.25; }
 .approach-arrow { position: absolute; left: 570px; top: 387px; width: 140px; height: 87px; background: #092b3a; clip-path: polygon(0 25%,68% 25%,68% 0,100% 50%,68% 100%,68% 75%,0 75%); }
 .approach-arrow > div { position: absolute; inset: 5px; background: #156082; clip-path: polygon(0 25%,68% 25%,68% 0,100% 50%,68% 100%,68% 75%,0 75%); }
-.approach-outcome { position: absolute; left: 788px; top: 278px; width: 450px; }
+.approach-outcome { position: absolute; left: 788px; top: 230px; width: 450px; }
 .reveal .approach-outcome > p { font-size: 53.333333px; line-height: 1.2; }
-.reveal .approach-outcome .physical-digital { margin-top: 78px; font-style: italic; white-space: nowrap; }
+.reveal .approach-outcome .physical-digital { margin-top: 36px; font-style: italic; white-space: nowrap; }
 .physical-digital span { color: #ffc000; }
-.reveal .approach-outcome .ai-support { margin-top: 25px; font-size: 32px; line-height: 1.25; }
+.student-outcomes { margin-top: 30px; }
+.reveal .student-outcomes h2 { margin-bottom: 12px; color: #156082; font-size: 28px; line-height: 1.2; font-weight: 700; }
+.reveal .student-outcomes p { font-size: 26px; line-height: 1.4; }
 @media (max-width: 480px) { .deck-controls { gap: 4px; } .deck-controls button { padding: 0 7px; font-size: 12px; } .divider { margin: 0; } }
 @media print { .deck-controls, #notice, .web-panel, .screen-slide { display: none !important; } .reveal .print-slide { display: block; } .reveal { height: 100%; } }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
