@@ -73,15 +73,44 @@ for slide in inventory["slides"]:
         region = slide["suggested_embed_pct"]
         box = ";".join(f"{key}:{region[value]}%" for key, value in
                        [("left", "x"), ("top", "y"), ("width", "w"), ("height", "h")])
-        tabs = ""
         if number == 6:
-            tabs = '<div class="study-tabs" role="group" aria-label="Study version">' + "".join(
-                f'<button class="study-tab" data-url="{esc(url)}" aria-pressed="{str(i == 0).lower()}">{label}</button>'
-                for i, (label, url) in enumerate(zip(["A: AI coach", "B: Rule-based"], links))) + '</div>'
-        panel = f'''
+            comparison_sites = []
+            for version, label, url in zip(
+                ("a", "b"), ("AI coach", "Rule-based replies"), links
+            ):
+                letter = version.upper()
+                coach_url = url + "#coachForm"
+                comparison_sites.append(f'''
+      <article class="comparison-site" data-version="{version}" aria-label="Version {letter}: {label}">
+        <div class="web-toolbar comparison-site-toolbar">
+          <strong>{letter} · {label}</strong>
+          <span class="web-address" hidden title="{esc(coach_url)}">{esc(coach_url)}</span>
+          <button class="reload-web" aria-label="Reload version {letter}" type="button">Reload</button>
+        </div>
+        <div class="web-viewport">
+          <div class="web-loading" role="status">Loading webpage…</div>
+          <iframe title="Slide 6: Version {letter}: {label}" data-web-src="{esc(coach_url)}" data-preload allow="fullscreen" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+      </article>''')
+            panel = f'''
+  <div class="web-panel comparison-panel" style="{box}">
+    <div class="web-toolbar comparison-toolbar">
+      <span class="comparison-title">AI coach vs. rule-based replies</span>
+      <button class="expand-web" aria-expanded="false" type="button">Expand webpage</button>
+    </div>
+    <form class="comparison-question-form">
+      <label for="comparison-question-6">Same question for both</label>
+      <input class="comparison-question" id="comparison-question-6" maxlength="500" type="text" value="Why does pressure increase with depth?" autocomplete="off">
+      <button class="copy-question" type="button">Copy question</button>
+    </form>
+    <div class="comparison-columns">{"".join(comparison_sites)}
+    </div>
+  </div>'''
+        else:
+            panel = f'''
   <div class="web-panel" style="{box}" data-initial-url="{esc(links[0])}">
     <div class="web-toolbar">
-{tabs}
+
       <span class="web-address" title="{esc(links[0])}">{esc(links[0])}</span>
       <button class="reload-web" title="Reload this webpage">Reload</button>
       <button class="expand-web" aria-expanded="false">Expand webpage</button>

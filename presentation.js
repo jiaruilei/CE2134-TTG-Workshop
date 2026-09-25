@@ -31,7 +31,7 @@ function loadWebpage(panel, url) {
   }, 15000);
   frame.onload = () => { clearTimeout(panel.loadingTimer); loading.hidden = true; };
   // Keep src when leaving the slide to preserve the site's state.
-  // A/B share one frame: their assignment URLs must not preload together.
+  // The comparison uses separate origins, so both versions keep independent state.
   frame.src = url;
 }
 function setExpanded(panel, expanded) {
@@ -40,22 +40,44 @@ function setExpanded(panel, expanded) {
   button.textContent = expanded ? 'Back to slide' : 'Expand webpage';
   button.setAttribute('aria-expanded', String(expanded));
 }
+function getWebsites(panel) {
+  return panel.classList.contains('comparison-panel')
+    ? panel.querySelectorAll('.comparison-site') : [panel];
+}
+async function copyComparisonQuestion(panel) {
+  const input = panel.querySelector('.comparison-question');
+  if (!input.value.trim()) {
+    input.focus();
+    notice('Enter a question to compare.');
+    return;
+  }
+  try {
+    await navigator.clipboard.writeText(input.value.trim());
+    notice('Question copied.');
+  } catch {
+    input.focus();
+    input.select();
+    notice('Copy the selected question.');
+  }
+}
 document.querySelectorAll('.web-panel').forEach(panel => {
   panel.querySelector('.expand-web').addEventListener('click', () => {
     setExpanded(panel, !panel.classList.contains('is-expanded'));
   });
-  panel.querySelector('.reload-web').addEventListener('click', () => {
-    loadWebpage(panel, panel.querySelector('iframe').dataset.webSrc);
-  });
-  panel.querySelectorAll('.study-tab').forEach(button => {
-    button.addEventListener('click', () => {
-      if (button.getAttribute('aria-pressed') === 'true') return;
-      panel.querySelectorAll('.study-tab').forEach(tab => {
-        tab.setAttribute('aria-pressed', String(tab === button));
-      });
-      loadWebpage(panel, button.dataset.url);
+  getWebsites(panel).forEach(site => {
+    site.querySelector('.reload-web').addEventListener('click', () => {
+      loadWebpage(site, site.querySelector('iframe').dataset.webSrc);
     });
   });
+  if (panel.classList.contains('comparison-panel')) {
+    panel.querySelector('.copy-question').addEventListener('click', () => copyComparisonQuestion(panel));
+    const form = panel.querySelector('.comparison-question-form');
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      copyComparisonQuestion(panel);
+    });
+    form.addEventListener('keydown', event => event.stopPropagation());
+  }
 });
 function sync() {
   const index = deck.getIndices().h;
@@ -66,8 +88,12 @@ function sync() {
   const slide = deck.getCurrentSlide();
   document.title = `${index + 1}. ${slide.dataset.title} · CDE TTG Workshop`;
   const panel = slide.querySelector('.web-panel');
-  if (panel && !panel.querySelector('iframe').hasAttribute('src')) {
-    loadWebpage(panel, panel.querySelector('iframe').dataset.webSrc);
+  if (panel) {
+    getWebsites(panel).forEach(site => {
+      if (!site.querySelector('iframe').hasAttribute('src')) {
+        loadWebpage(site, site.querySelector('iframe').dataset.webSrc);
+      }
+    });
   }
 }
 function enterSlide() {
