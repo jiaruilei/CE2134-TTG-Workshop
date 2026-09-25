@@ -30,9 +30,9 @@ The B service runs on Render's free plan in the NUS workspace, Singapore region.
 - `demos/pressure-b/`: independently hosted copy of the pressure lab, fixed to version B. See its README for upstream provenance and deployment commands.
 - `scripts/source-inventory.json`: text, links and placement information extracted from this updated deck.
 - `scripts/website-overrides.json`: replacement URL for the independently hosted B copy, when configured.
-- `custom/slide-05.html`, `custom/slide-12.html`, `scripts/slide-overrides.json`: authored browser slides and speaker notes, preserved when rebuilding.
+- `custom/slide-05.html`, `custom/slide-12.html`, `scripts/slide-overrides.json`: authored browser slides and source metadata, preserved when rebuilding.
 - `scripts/export_slides.ps1`, `scripts/build_presentation.py`: reproducible export and browser-deck generation for this source deck.
-- `reveal.js`, `reveal.css`, `notes.js`, `LICENSE-reveal.txt`: bundled reveal.js 5.2.1 and MIT license. This license covers reveal.js, not the supplied teaching content.
+- `reveal.js`, `reveal.css`, `LICENSE-reveal.txt`: bundled reveal.js 5.2.1 and MIT license. This license covers reveal.js, not the supplied teaching content.
 
 GitHub Pages serves the root of `main`. The original PowerPoint is kept outside this public repository. Most slide artwork is displayed as images to preserve its appearance; edit the PowerPoint and regenerate to change those slides. Edit the HTML in `custom/` and rebuild to revise slides 5 and 12. Their styling is in `styles.css`; the 1280 × 720 canvas uses 52px and 32px for slide 5’s original 39pt and 24pt font sizes.
 

@@ -3,7 +3,7 @@ const deck = new Reveal({
   width: 1280, height: 720, margin: 0.015, minScale: 0.1, maxScale: 3,
   hash: true, history: true, controls: false, progress: true, center: false,
   transition: 'none', backgroundTransition: 'none', overview: true,
-  keyboard: true, slideNumber: false, plugins: [RevealNotes],
+  keyboard: true, slideNumber: false,
 });
 const previous = document.getElementById('previous');
 const next = document.getElementById('next');
@@ -84,7 +84,6 @@ fullscreen.addEventListener('click', async () => {
 document.addEventListener('fullscreenchange', () => {
   fullscreen.textContent = document.fullscreenElement ? 'Exit full screen' : 'Full screen';
 });
-document.getElementById('notes').addEventListener('click', () => deck.getPlugin('notes').open());
 document.addEventListener('keydown', event => {
   if (event.key === 'Escape') {
     const panel = deck.getCurrentSlide()?.querySelector('.is-expanded');

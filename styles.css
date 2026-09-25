@@ -9,7 +9,6 @@ body { background: #151e2c; color: #fff; font-family: Arial, sans-serif; }
 .reveal .source-slide.fragment { transition: none; }
 .reveal .print-slide { display: none; }
 .reveal .progress { height: 3px; color: var(--orange); }
-.reveal .slides section .notes { display: none; }
 .web-panel { position: absolute; z-index: 3; display: flex; flex-direction: column; background: white; border: 1px solid #bdc8d5; border-radius: 5px; overflow: hidden; }
 .web-toolbar { height: 40px; min-height: 40px; display: flex; align-items: center; gap: 8px; padding: 5px 8px; background: #eff3f7; color: #263f5b; font: 13px Arial, sans-serif; }
 .web-address { min-width: 0; flex: 1; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; text-align: left; }
