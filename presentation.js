@@ -70,6 +70,11 @@ function sync() {
     loadWebpage(panel, panel.querySelector('iframe').dataset.webSrc);
   }
 }
+function enterSlide() {
+  const panel = deck.getCurrentSlide()?.querySelector('.web-panel');
+  if (panel) setExpanded(panel, true);
+  sync();
+}
 previous.addEventListener('click', () => deck.prev());
 next.addEventListener('click', () => deck.next());
 document.getElementById('overview').addEventListener('click', () => deck.toggleOverview());
@@ -96,9 +101,9 @@ document.addEventListener('keydown', event => {
 });
 deck.on('slidechanged', event => {
   event.previousSlide?.querySelectorAll('.is-expanded').forEach(panel => setExpanded(panel, false));
-  sync();
+  enterSlide();
 });
 deck.on('fragmentshown', sync);
 deck.on('fragmenthidden', sync);
-deck.initialize().then(sync);
+deck.initialize().then(enterSlide);
 window.workshopDeck = deck;

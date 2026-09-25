@@ -8,7 +8,7 @@ A 12-slide browser presentation based on the updated `CE2134_TTG.pptx`. Original
 
 Open the presentation in Chrome or Edge and choose **Full screen**. Use the on-screen arrows or Left/Right keys to advance. On slide 2 the arrows reveal the original animation steps before moving on. **Overview** shows all slides. The bottom navigation stays available after you click inside a webpage.
 
-Slides **4, 6, 8 and 10** contain live webpages. Interact and scroll within each page. **Expand webpage** fills the presentation area, and **Back to slide** restores the original layout without opening another window. **Reload** reloads just that page. Pages load when first visited and retain their state when you move between slides. Switching A/B deliberately loads the selected version afresh.
+Slides **4, 6, 8 and 10** automatically open their live webpages in the expanded presentation area. Interact and scroll within each page. **Back to slide** restores the original layout, and **Expand webpage** returns to the demonstration without opening another window. **Reload** reloads just that page. Pages load when first visited and retain their state when you move between slides. Switching A/B deliberately loads the selected version afresh.
 
 | Slide | Webpage |
 | --- | --- |
