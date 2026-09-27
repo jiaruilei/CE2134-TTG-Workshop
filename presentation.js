@@ -98,7 +98,7 @@ function sync() {
 }
 function enterSlide() {
   const panel = deck.getCurrentSlide()?.querySelector('.web-panel');
-  if (panel) setExpanded(panel, true);
+  if (panel) setExpanded(panel, panel.dataset.autoExpand !== 'false');
   sync();
 }
 previous.addEventListener('click', () => deck.prev());

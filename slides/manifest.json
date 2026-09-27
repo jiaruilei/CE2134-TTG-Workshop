@@ -113,10 +113,12 @@
     },
     {
       "number": 12,
-      "title": "AI in my experiential learning",
+      "title": "Summary and future work",
       "content": "custom/slide-12.html",
-      "contentSha256": "5f2a7eed1bc27f63c9b90f3a79bf60c25367836175a5babc825edc5c7f2ac586",
-      "websites": [],
+      "contentSha256": "a3eab1008f05c09f6a3e83cfb34e41299c3427b3fbe5d777123279f57f8ed0c2",
+      "websites": [
+        "https://ce2134-interactive-lab-tank.onrender.com/"
+      ],
       "sourceWebsites": []
     }
   ]

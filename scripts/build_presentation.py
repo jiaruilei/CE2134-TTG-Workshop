@@ -35,7 +35,7 @@ def authored_slide(number, revision):
     sections.append(f'<section id="slide-{number}" data-title="{esc(title)}" aria-label="Slide {number}: {esc(title)}">\n{content}\n</section>')
     record = {"number": number, "title": title, "content": revision["content"],
               "contentSha256": hashlib.sha256(content_path.read_bytes()).hexdigest(),
-              "websites": [], "sourceWebsites": []}
+              "websites": revision.get("websites", []), "sourceWebsites": []}
     if number <= inventory["slide_count"]:
         record["sourceImage"] = f"slides/slide-{number:02}.png"
     manifest["slides"].append(record)

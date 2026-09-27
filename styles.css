@@ -70,19 +70,13 @@ body { background: #151e2c; color: #fff; font-family: Arial, sans-serif; }
 .reveal .assignment-row h2 { color: #156082; font-size: 32px; line-height: 1.25; font-weight: 700; margin-bottom: 16px; }
 .reveal .assignment-row p { font-size: 32px; line-height: 1.25; }
 .reveal .closing-summary .slide-heading { font-size: 56px; }
-.approach-panel { position: absolute; left: 88.32px; width: 413.76px; padding: 30px 20px; border-radius: 36px; display: flex; align-items: center; }
+.approach-panel { position: absolute; left: 88.32px; width: 500px; padding: 20px; border-radius: 36px; display: flex; align-items: center; }
 .approach-integrated { top: 192px; height: 207px; background: #d2e4f5; }
 .approach-continuing { top: 440px; height: 209px; background: #d2e4f5; }
 .reveal .approach-panel p { font-size: 32px; line-height: 1.25; }
-/* Reuse page 2's original arrow at the identical slide coordinates and scale. */
-.approach-arrow { position: absolute; left: 560px; top: 375px; width: 160px; height: 110px; background: url("slides/slide-02.png") -560px -375px / 1280px 720px no-repeat; }
-.approach-outcome { position: absolute; left: 788px; top: 230px; width: 450px; }
-.reveal .approach-outcome > p { font-size: 53.333333px; line-height: 1.2; }
-.reveal .approach-outcome .physical-digital { margin-top: 36px; font-style: italic; white-space: nowrap; }
-.physical-digital span { color: #ffc000; }
-.student-outcomes { margin-top: 30px; }
-.reveal .student-outcomes h2 { margin-bottom: 12px; color: #156082; font-size: 28px; line-height: 1.2; font-weight: 700; }
-.reveal .student-outcomes p { font-size: 26px; line-height: 1.4; }
+.summary-lab { left: 640px; top: 192px; width: 552px; height: 457px; }
+/* Keep the tank's desktop layout visible in the half-slide preview. */
+.summary-lab:not(.is-expanded) iframe { width: 200%; height: 200%; transform: scale(.5); transform-origin: top left; }
 @media (max-width: 480px) { .deck-controls { gap: 4px; } .deck-controls button { padding: 0 7px; font-size: 12px; } .divider { margin: 0; } }
 @media print { .deck-controls, #notice, .web-panel, .screen-slide { display: none !important; } .reveal .print-slide { display: block; } .reveal { height: 100%; } }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
