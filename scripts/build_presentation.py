@@ -45,6 +45,8 @@ for slide in inventory["slides"]:
     title = slide["paragraphs"][0] if number != 3 else "Experiential learning: Physical"
     picture = f"slides/slide-{number:02}.png"
     copy_asset(export_dir / Path(picture).name, ROOT / picture)
+    if number == 11:
+        copy_asset(export_dir / "slide-11-revised.png", ROOT / "slides/slide-11-revised.png")
     if str(number) in slide_overrides:
         authored_slide(number, slide_overrides[str(number)])
         continue

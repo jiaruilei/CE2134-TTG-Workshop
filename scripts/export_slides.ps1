@@ -16,6 +16,21 @@ try {
     for ($i=1; $i -le $presentation.Slides.Count; $i++) {
         $presentation.Slides.Item($i).Export((Join-Path $outputPath ('slide-{0:00}.png' -f $i)), 'PNG', 1920, 1080)
     }
+    # Page 11: remove the last evidence row and retain the gap below the table.
+    $slide = $presentation.Slides.Item(11)
+    $tableShape = $slide.Shapes.Item('Table 4')
+    $example = $slide.Shapes.Item('TextBox 6')
+    $lastRow = $tableShape.Table.Rows.Count
+    if ($tableShape.Table.Cell($lastRow, 1).Shape.TextFrame.TextRange.Text.Trim() -ne 'Reasoning follow-ups') {
+        throw 'Page 11 no longer has the expected final evidence row.'
+    }
+    $oldBottom = $tableShape.Top + $tableShape.Height
+    $originalGap = $example.Top - $oldBottom
+    $tableShape.Table.Rows.Item($lastRow).Delete()
+    $newBottom = $tableShape.Top + $tableShape.Height
+    $example.Top = $newBottom + $originalGap
+    $slide.Export((Join-Path $outputPath 'slide-11-revised.png'), 'PNG', 1920, 1080)
+    Write-Output ('Page 11: removed {0:N3} pt; gap retained at {1:N3} pt.' -f ($oldBottom - $newBottom), $originalGap)
     # Preserve the two Appear builds; show both dates with the final build.
     $slide = $presentation.Slides.Item(2)
     foreach ($shape in $slide.Shapes) {

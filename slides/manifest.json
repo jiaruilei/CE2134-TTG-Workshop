@@ -105,10 +105,11 @@
     {
       "number": 11,
       "title": "PSet 3 AI learning support beyond confidence",
-      "image": "slides/slide-11.png",
+      "content": "custom/slide-11.html",
+      "contentSha256": "0e29215c4bca7ff96964c588b8eec4ec3f684b131890f1e08c0ac4eec27226a4",
       "websites": [],
       "sourceWebsites": [],
-      "imageSha256": "25db2c1e63a3f14600453b0aec2fe8056a14f71a589d9e7ef4ccbabba0886eb4"
+      "sourceImage": "slides/slide-11.png"
     },
     {
       "number": 12,
