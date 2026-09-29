@@ -85,7 +85,7 @@ document.querySelectorAll('.phygital-wordmark').forEach(wordmark => {
   });
   wordmark.addEventListener('click', event => {
     event.stopPropagation();
-    // A deliberate replay also permits motion when automatic motion is reduced.
+    // Restart the same animation that plays automatically on slide entry.
     wordmark.classList.add('motion-requested');
     const words = wordmark.querySelectorAll('.phygital-source, .phygital-result');
     words.forEach(word => { word.style.animation = 'none'; });
@@ -111,7 +111,10 @@ function sync() {
   }
 }
 function enterSlide() {
-  const panel = deck.getCurrentSlide()?.querySelector('.web-panel');
+  const slide = deck.getCurrentSlide();
+  // The presenter requested this brief animation on every entry to slide 12.
+  slide?.querySelector('.phygital-wordmark')?.classList.add('motion-requested');
+  const panel = slide?.querySelector('.web-panel');
   if (panel) setExpanded(panel, panel.dataset.autoExpand !== 'false');
   sync();
 }
