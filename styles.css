@@ -70,6 +70,39 @@ body { background: #151e2c; color: #fff; font-family: Arial, sans-serif; }
 .reveal .assignment-row h2 { color: #156082; font-size: 32px; line-height: 1.25; font-weight: 700; margin-bottom: 16px; }
 .reveal .assignment-row p { font-size: 32px; line-height: 1.25; }
 .reveal .closing-summary .slide-heading { font-size: 56px; }
+/* A finite text animation, restarted by Reveal when this slide becomes present. */
+.phygital-wordmark { position: absolute; top: 74px; right: 88px; width: 320px; height: 80px; padding: 0; border: 0; background: transparent; color: var(--navy); cursor: pointer; }
+.phygital-wordmark:focus-visible { outline: 2px solid var(--orange); outline-offset: 4px; }
+.reveal.overview .phygital-wordmark { pointer-events: none; }
+.phygital-source, .phygital-result { position: absolute; top: 50%; left: 50%; white-space: nowrap; font-family: Arial, sans-serif; font-weight: 600; line-height: 1.2; }
+.phygital-source { font-size: 32px; opacity: 0; }
+.phygital-physical, .phygital-phy { color: #c65c13; }
+.phygital-result { font-size: 50px; letter-spacing: -1.5px; transform: translate(-50%, -50%); }
+.reveal:not(.overview) #slide-12.present .phygital-physical { animation: physical-approach 3.6s ease-in-out both; }
+.reveal:not(.overview) #slide-12.present .phygital-digital { animation: digital-approach 3.6s ease-in-out both; }
+.reveal:not(.overview) #slide-12.present .phygital-result { animation: phygital-merge 3.6s ease-in-out both; }
+@keyframes physical-approach {
+  0%, 28% { opacity: 1; transform: translate(calc(-100% - 32px), -50%); }
+  62% { opacity: 1; transform: translate(calc(-100% - 2px), -50%); }
+  78%, 100% { opacity: 0; transform: translate(calc(-100% + 10px), -50%); }
+}
+@keyframes digital-approach {
+  0%, 28% { opacity: 1; transform: translate(32px, -50%); }
+  62% { opacity: 1; transform: translate(2px, -50%); }
+  78%, 100% { opacity: 0; transform: translate(-10px, -50%); }
+}
+@keyframes phygital-merge {
+  0%, 62% { opacity: 0; transform: translate(-50%, -50%) scale(.88); }
+  86%, 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal #slide-12 .phygital-wordmark:not(.motion-requested) .phygital-source { animation: none !important; display: none; }
+  .reveal #slide-12 .phygital-wordmark:not(.motion-requested) .phygital-result { animation: none !important; opacity: 1; transform: translate(-50%, -50%); }
+}
+@media print {
+  .reveal #slide-12 .phygital-source { animation: none !important; display: none; }
+  .reveal #slide-12 .phygital-result { animation: none !important; opacity: 1; transform: translate(-50%, -50%); }
+}
 .approach-panel { position: absolute; left: 88.32px; width: 500px; padding: 20px; border-radius: 36px; display: flex; align-items: center; }
 .approach-integrated { top: 192px; height: 207px; background: #d2e4f5; }
 .approach-continuing { top: 440px; height: 209px; background: #d2e4f5; }

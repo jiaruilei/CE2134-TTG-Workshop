@@ -79,6 +79,20 @@ document.querySelectorAll('.web-panel').forEach(panel => {
     form.addEventListener('keydown', event => event.stopPropagation());
   }
 });
+document.querySelectorAll('.phygital-wordmark').forEach(wordmark => {
+  wordmark.addEventListener('keydown', event => {
+    if (event.key === ' ') event.stopPropagation();
+  });
+  wordmark.addEventListener('click', event => {
+    event.stopPropagation();
+    // A deliberate replay also permits motion when automatic motion is reduced.
+    wordmark.classList.add('motion-requested');
+    const words = wordmark.querySelectorAll('.phygital-source, .phygital-result');
+    words.forEach(word => { word.style.animation = 'none'; });
+    void wordmark.offsetWidth;
+    words.forEach(word => { word.style.animation = ''; });
+  });
+});
 function sync() {
   const index = deck.getIndices().h;
   const total = deck.getTotalSlides();
@@ -126,6 +140,7 @@ document.addEventListener('keydown', event => {
   }
 });
 deck.on('slidechanged', event => {
+  event.previousSlide?.querySelector('.phygital-wordmark')?.classList.remove('motion-requested');
   event.previousSlide?.querySelectorAll('.is-expanded').forEach(panel => setExpanded(panel, false));
   enterSlide();
 });
