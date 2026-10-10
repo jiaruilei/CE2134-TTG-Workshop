@@ -142,8 +142,9 @@ for number in sorted(int(key) for key in slide_overrides if int(key) > inventory
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="reveal.css">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="effects/final-slide/final-slide.css">
 </head>
-<body>
+<body data-wave-phase="idle">
 <main class="reveal" aria-label="CE2134 workshop presentation"><div class="slides">
 ''' + "\n".join(sections) + '''
 </div></main>
@@ -157,6 +158,8 @@ for number in sorted(int(key) for key in slide_overrides if int(key) > inventory
 </nav>
 <div id="notice" role="status" hidden></div>
 <script src="reveal.js"></script><script src="presentation.js"></script>
+''' + (ROOT / "custom/wave-overlay.html").read_text(encoding="utf-8") + '''
+<script type="module" src="effects/final-slide/final-slide.mjs"></script>
 </body></html>
 ''', encoding="utf-8", newline="\n")
 (ROOT / "slides" / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
@@ -164,7 +167,7 @@ for number in sorted(int(key) for key in slide_overrides if int(key) > inventory
 page = ROOT / "index.html"
 content = page.read_text(encoding="utf-8")
 content = content.replace("TOTAL_SLIDES", str(len(sections)))
-for asset in ("styles.css", "presentation.js", "slides/slide-02-build-0.png", "slides/slide-02-build-1.png"):
+for asset in ("styles.css", "presentation.js", "effects/final-slide/final-slide.css", "effects/final-slide/final-slide.mjs", "slides/slide-02-build-0.png", "slides/slide-02-build-1.png"):
     version = hashlib.sha256((ROOT / asset).read_bytes()).hexdigest()[:12]
     content = content.replace(f'"{asset}"', f'"{asset}?v={version}"')
 page.write_text(content, encoding="utf-8", newline="\n")

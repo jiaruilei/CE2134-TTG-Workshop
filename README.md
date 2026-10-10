@@ -25,6 +25,16 @@ The B copy avoids the original study site's `SameSite=Lax` assignment cookie: in
 
 The B service runs on Render's free plan in the NUS workspace, Singapore region. [Manage the service](https://dashboard.render.com/web/srv-daqmemjktnus73bdlci0). Automatic deployment is off so slide-only updates do not restart the demonstration service. After changing `demos/pressure-b`, deploy the latest commit from this service's Render dashboard. Its build/start commands are `npm --prefix demos/pressure-b ci` and `npm --prefix demos/pressure-b start`.
 
+## Final-slide wave effect
+
+On slide 12, **Proceed** in the lower-right corner fills the screen with the wave effect, then returns to the slide. The camera starts automatically on entry and asks for browser permission on first use. There is no camera toggle. Proceed still works if camera access is denied.
+
+For the gesture trigger, stand back so both shoulders, elbows and wrists stay in view, even overhead. Hold both arms straight out horizontally for about 0.6 seconds, sweep them upward together over 1–4 seconds, and hold them vertically overhead for about 0.3 seconds. After a wave, return to horizontal before repeating. **Pause water**, **Back to slide** and Escape are available during playback.
+
+Camera inference runs on-device without recording, upload or microphone access. The pinned MediaPipe library and pose model download on first use. The camera stays on during playback, while gesture detection pauses. Leaving slide 12, entering overview or slide blackout, or hiding the tab stops the presentation camera. The embedded lab retains its separate Hand control. Rehearse the gesture in the presentation browser before use.
+
+The effect uses WebGL with a Canvas fallback. No scientific calculations are changed. Its sources are in `effects/final-slide/`, with slide controls in `custom/slide-12.html` and the shared overlay in `custom/wave-overlay.html`. Run `node --test effects/final-slide/camera-trigger.test.mjs` for the gesture and camera lifecycle checks.
+
 ## Files
 
 - `index.html`, `styles.css`, `presentation.js`: browser presentation and controls.

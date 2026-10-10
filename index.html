@@ -8,8 +8,9 @@
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="reveal.css">
   <link rel="stylesheet" href="styles.css?v=b124983601a1">
+  <link rel="stylesheet" href="effects/final-slide/final-slide.css?v=7ec3c8925a33">
 </head>
-<body>
+<body data-wave-phase="idle">
 <main class="reveal" aria-label="CE2134 workshop presentation"><div class="slides">
 <section id="slide-1" data-title="AI-integrated Interactive Platforms for CE2134 Fluid Mechanics" aria-label="Slide 1: AI-integrated Interactive Platforms for CE2134 Fluid Mechanics">
 <div class="authored-slide cover-title-revision">
@@ -170,7 +171,10 @@
       <iframe title="Slide 12: CE2134 interactive lab tank" data-web-src="https://ce2134-interactive-lab-tank.onrender.com/" data-preload allow="fullscreen; camera https://ce2134-interactive-lab-tank.onrender.com" referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </div>
   </div>
-  <span class="original-page" aria-hidden="true">12</span>
+  <div class="tank-launch">
+    <span id="camera-state" class="tank-camera-state" role="img" aria-label="Camera starting" title="Camera starting"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2zm12 3 6-3v10l-6-3z"/></svg><span id="gesture-progress"></span></span>
+    <button id="proceed" class="tank-proceed" type="button">Proceed <span aria-hidden="true">→</span></button>
+  </div>
 </div>
 
 </section>
@@ -185,4 +189,15 @@
 </nav>
 <div id="notice" role="status" hidden></div>
 <script src="reveal.js"></script><script src="presentation.js?v=7a1c88b51479"></script>
+<canvas id="water" aria-hidden="true" hidden></canvas>
+<div id="water-caption" class="tank-water-caption" aria-hidden="true"><span>PHYSICAL</span><i>+</i><span>DIGITAL</span></div>
+<div id="wave-controls" class="tank-wave-controls" hidden>
+  <button id="pause" type="button">Pause water</button>
+  <button id="skip" type="button">Back to slide</button>
+</div>
+<div id="fill-indicator" class="tank-fill-indicator" hidden><span id="fill-label">Water entering</span><strong id="fill-value">0%</strong></div>
+<video id="camera-video" class="tank-camera-video" autoplay muted playsinline aria-hidden="true" tabindex="-1"></video>
+<p id="camera-status" class="tank-sr-only" role="status" aria-live="polite"></p>
+<p id="wave-status" class="tank-sr-only" role="status" aria-live="polite"></p>
+<script type="module" src="effects/final-slide/final-slide.mjs?v=bf5fc9be24c1"></script>
 </body></html>
