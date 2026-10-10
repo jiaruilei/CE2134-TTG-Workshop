@@ -1,4 +1,4 @@
-import {WaterTank, preloadMangroves} from './water-tank.mjs?v=fa557c0f04ea';
+import {WaterTank} from './water-tank.mjs';
 import {SharedHandInput} from './shared-hand-input.mjs?v=1d5817721d90';
 
 const $ = id => document.getElementById(id);
@@ -7,7 +7,6 @@ const deckElement = document.querySelector('.reveal');
 const deckControls = document.querySelector('.deck-controls');
 // Keep the GPU available to the live lab until the wave is actually requested.
 let tank = null;
-preloadMangroves();
 const duration = 9600;
 // Allow the 3.6-second text merge, then hold PHYGITAL for over four seconds.
 const endingHold = 6000, endingHoldAt = duration * .84;
@@ -48,7 +47,6 @@ function begin(source = 'gesture'){
   if(!finalSlide || phase !== 'ready') return;
   camera.setEnabled(false);
   elapsed = 0;
-  renderTime = 0;
   captionAnnounced = false;
   $('water').hidden = false;
   $('water').style.opacity = '1';
