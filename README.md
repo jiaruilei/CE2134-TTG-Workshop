@@ -27,7 +27,7 @@ The B service runs on Render's free plan in the NUS workspace, Singapore region.
 
 ## Final-slide wave effect
 
-On slide 12, **Proceed** in the lower-right corner fills the screen with the wave effect, then returns to the slide. The embedded lab starts its camera automatically on entry and asks for browser permission on first use. That single camera supplies both the lab controls and the wave gesture trigger. Proceed still works if camera access is denied.
+On slide 12, **Proceed** in the lower-right corner fills the screen with the wave effect, then returns to the slide. The ending holds **PHYSICAL + DIGITAL** for four extra seconds while the water continues moving, bringing playback to about 14 seconds. The embedded lab starts its camera automatically on entry and asks for browser permission on first use. That single camera supplies both the lab controls and the wave gesture trigger. Proceed still works if camera access is denied.
 
 For the gesture trigger, briefly hold both open hands apart, then clap them together. Keep both hands visible until they meet; the detector triggers just before contact, when they may obscure one another. Finger orientation is unrestricted, and shoulders and elbows do not need to be visible. After a wave, separate your hands before repeating. **Pause water**, **Back to slide** and Escape are available during playback.
 

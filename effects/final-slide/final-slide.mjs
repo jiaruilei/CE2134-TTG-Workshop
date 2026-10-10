@@ -8,6 +8,7 @@ const deckControls = document.querySelector('.deck-controls');
 // Keep the GPU available to the live lab until the wave is actually requested.
 let tank = null;
 const duration = 9600;
+const endingHold = 4000, endingHoldAt = duration * .84;
 let finalSlide = false, phase = 'idle', paused = false;
 let elapsed = 0, lastTime = 0, renderTime = 0, raf = 0, lastPercent = -1;
 deck.configure({keyboardCondition: event => phase !== 'running' &&
@@ -101,10 +102,12 @@ function frame(now){
     if(phase === 'running') elapsed += dt;
   }
   if(phase === 'running'){
-    const fraction = Math.min(1,elapsed/duration);
+    // Hold the fully immersed caption while the water keeps moving.
+    const timelineElapsed = elapsed <= endingHoldAt ? elapsed : Math.max(endingHoldAt,elapsed-endingHold);
+    const fraction = Math.min(1,timelineElapsed/duration);
     const filling = Math.min(1,fraction/.76);
     const progress = filling*filling*(3-2*filling);
-    const entry = Math.min(1,elapsed/900), exit = Math.min(1,(duration-elapsed)/1000);
+    const entry = Math.min(1,timelineElapsed/900), exit = Math.min(1,(duration-timelineElapsed)/1000);
     const reveal = Math.max(0,entry*entry*(3-2*entry)*exit*exit*(3-2*exit));
     $('water').style.opacity = String(fraction>.90 ? Math.max(0,1-(fraction-.90)/.10) : 1);
     tank.render({time:renderTime,progress,intensity:1,reveal});
