@@ -9,23 +9,16 @@ const deckControls = document.querySelector('.deck-controls');
 let tank = null;
 const duration = 9600;
 const endingHold = 4000, endingHoldAt = duration * .84;
-let finalSlide = false, phase = 'idle', paused = false;
-let elapsed = 0, lastTime = 0, renderTime = 0, raf = 0, lastPercent = -1;
+let finalSlide = false, phase = 'idle';
+let elapsed = 0, lastTime = 0, renderTime = 0, raf = 0;
 deck.configure({keyboardCondition: event => phase !== 'running' &&
   !(event.key === ' ' && event.target.closest?.('#proceed'))});
 
-function cameraStatus(text, code = 'ready'){
+function cameraStatus(text){
   $('camera-status').textContent = text;
-  $('camera-state').dataset.state = code;
-  $('camera-state').setAttribute('aria-label', text);
-  $('camera-state').title = text;
 }
 const camera = new SharedHandInput({
   frame: document.querySelector('#slide-12 .summary-lab iframe'), onStatus: cameraStatus,
-  onProgress(value){
-    const progress = Math.max(0, Math.min(100, Math.round(Number(value)*100)));
-    $('gesture-progress').style.width = progress+'%';
-  },
   onTrigger(){ begin('gesture'); }
 });
 
@@ -33,8 +26,6 @@ function setPhase(next){
   phase = next;
   document.body.dataset.wavePhase = next;
   const running = next === 'running';
-  $('wave-controls').hidden = !running;
-  $('fill-indicator').hidden = !running;
   deckElement.inert = running;
   deckControls.inert = running;
   $('proceed').disabled = running;
@@ -43,10 +34,9 @@ function startCamera(){
   if(!finalSlide || document.hidden) return;
   camera.setEnabled(phase === 'ready');
   // The embedded lab owns the only camera and sends its hand landmarks here.
-  camera.start().catch(error => cameraStatus(error?.message || 'Camera unavailable. Proceed still works.', 'error'));
+  camera.start().catch(error => cameraStatus(error?.message || 'Camera unavailable. Proceed still works.'));
 }
 function hideWater(){
-  paused = false;
   $('water').hidden = true;
   $('water').style.opacity = '0';
   delete document.body.dataset.waveSubphase;
@@ -54,16 +44,15 @@ function hideWater(){
 function begin(source = 'button'){
   if(!finalSlide || phase !== 'ready') return;
   camera.setEnabled(false);
-  paused = false; elapsed = 0; lastPercent = -1;
-  $('pause').textContent = 'Pause water';
-  $('fill-label').textContent = 'Water entering';
+  elapsed = 0;
   $('water').hidden = false;
   $('water').style.opacity = '1';
   if(!tank) tank = new WaterTank($('water'));
   tank.resize();
   setPhase('running');
-  $('pause').focus({preventScroll:true});
   $('wave-status').textContent = source === 'gesture' ? 'Hand clap gesture detected. The wave is starting.' : 'The wave is starting.';
+  // Bring keyboard focus out of the lab iframe so Escape remains available.
+  $('wave-status').focus({preventScroll:true});
 }
 function finish({focus = true} = {}){
   hideWater();
@@ -88,16 +77,10 @@ function syncSlide(){
     $('wave-status').textContent = '';
   }
 }
-function togglePause(){
-  if(phase !== 'running') return;
-  paused = !paused;
-  $('pause').textContent = paused ? 'Resume water' : 'Pause water';
-  $('fill-label').textContent = paused ? 'Water paused' : 'Water entering';
-}
 function frame(now){
   const dt = lastTime ? Math.min(50,now-lastTime) : 0;
   lastTime = now;
-  if(!document.hidden && !paused){
+  if(!document.hidden){
     renderTime += dt/1000;
     if(phase === 'running') elapsed += dt;
   }
@@ -112,23 +95,16 @@ function frame(now){
     $('water').style.opacity = String(fraction>.90 ? Math.max(0,1-(fraction-.90)/.10) : 1);
     tank.render({time:renderTime,progress,intensity:1,reveal});
     document.body.dataset.waveSubphase = fraction>.79 && fraction<.94 ? 'immersed' : 'filling';
-    const percent = Math.round(progress*100);
-    if(percent !== lastPercent){ $('fill-value').textContent = percent+'%'; lastPercent = percent; }
-    if(!paused) $('fill-label').textContent = fraction>.90 ? 'Returning to slide' : progress>=1 ? 'Fully immersed' : 'Water entering';
     if(fraction===1) finish();
   }
   raf = requestAnimationFrame(frame);
 }
 $('proceed').addEventListener('click',event=>{event.stopPropagation();begin();});
-$('pause').addEventListener('click',togglePause);
-$('skip').addEventListener('click',()=>finish());
 document.addEventListener('keydown',event=>{
   if(phase !== 'running') return;
   if(event.key==='Escape'){
     event.preventDefault(); event.stopImmediatePropagation(); finish();
-  }else if(event.key===' ' && !event.target.closest('button')){
-    event.preventDefault(); event.stopImmediatePropagation(); togglePause();
-  }else if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','PageUp','PageDown','Home','End'].includes(event.key)){
+  }else if([' ','ArrowLeft','ArrowRight','ArrowUp','ArrowDown','PageUp','PageDown','Home','End'].includes(event.key)){
     event.preventDefault(); event.stopImmediatePropagation();
   }
 },true);

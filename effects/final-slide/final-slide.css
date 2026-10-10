@@ -3,26 +3,15 @@
 .tank-proceed{display:flex;align-items:center;justify-content:space-between;gap:24px;min-width:154px;height:46px;padding:0 19px;border:1px solid #167389;border-radius:7px;color:#fff;background:linear-gradient(135deg,#156082,#087c92);box-shadow:0 4px 12px #15608225;font:600 21px/1 Arial,sans-serif;cursor:pointer}
 .tank-proceed:hover{background:linear-gradient(135deg,#104966,#0891a8)}
 .tank-proceed span{font-size:26px;font-weight:400}
-.tank-proceed:focus-visible,.tank-wave-controls button:focus-visible{outline:3px solid #ed7d31;outline-offset:4px}
-.tank-camera-state{position:relative;width:25px;height:27px;color:#88969e;display:block;overflow:hidden}
-.tank-camera-state svg{display:block;width:24px;height:24px;fill:currentColor}
-.tank-camera-state[data-state="ready"],.tank-camera-state[data-state="idle"],.tank-camera-state[data-state="armed"],.tank-camera-state[data-state="sweeping"],.tank-camera-state[data-state="tracking"],.tank-camera-state[data-state="triggered"],.tank-camera-state[data-state="paused"]{color:#188267}
-.tank-camera-state[data-state="error"]{color:#af7630}
-#gesture-progress{position:absolute;left:0;bottom:0;height:2px;width:0;background:#1eb4c2;transition:width .1s}
+.tank-proceed:focus-visible{outline:3px solid #ed7d31;outline-offset:4px}
 .reveal.overview .tank-launch{visibility:hidden;pointer-events:none}
-body[data-wave-phase="running"] .tank-launch{visibility:hidden}
+body[data-wave-phase="running"] .tank-launch,body[data-wave-phase="running"] .deck-controls,body[data-wave-phase="running"] .reveal .progress{visibility:hidden}
 #water{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1000}
-#water[hidden],.tank-wave-controls[hidden],.tank-fill-indicator[hidden]{display:none!important}
+#water[hidden]{display:none!important}
 body[data-wave-phase="running"] .reveal{filter:brightness(.60) saturate(.75)}
-.tank-wave-controls{position:fixed;top:18px;right:22px;z-index:1020;display:flex;gap:8px}
-.tank-wave-controls button{padding:9px 13px;border:1px solid #c5f7ff38;border-radius:6px;background:#072b42db;color:#eafaff;font:13px Arial,sans-serif;cursor:pointer}
-.tank-wave-controls button:hover{background:#124c63}
 .tank-water-caption{position:fixed;inset:0;z-index:1005;display:flex;align-items:center;justify-content:center;gap:20px;pointer-events:none;opacity:0;color:#ecfcff;font:500 clamp(16px,2.6vw,34px)/1 Arial,sans-serif;letter-spacing:.3em;text-shadow:0 0 50px #a7f4ffb0;transition:opacity .6s}
 .tank-water-caption i{font-style:normal;color:#83d5e8;letter-spacing:0;font-weight:200}
 body[data-wave-subphase="immersed"] .tank-water-caption{opacity:.95}
-.tank-fill-indicator{position:fixed;bottom:24px;right:25px;z-index:1010;display:flex;align-items:center;gap:12px;padding:10px 15px;border:1px solid #99e8f52c;border-radius:24px;background:#032338b3;color:#c2eaf1;font:11px Arial,sans-serif}
-.tank-fill-indicator strong{font-variant-numeric:tabular-nums;color:#fff;min-width:30px;text-align:right}
-/* Attached, playing video permits local pose inference without a preview overlay. */
 .tank-sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
-@media(max-width:700px){.tank-wave-controls{top:12px;right:12px}.tank-water-caption{gap:12px;letter-spacing:.12em}}
-@media print{.tank-launch,#water,.tank-wave-controls,.tank-fill-indicator,.tank-water-caption{display:none!important}}
+@media(max-width:700px){.tank-water-caption{gap:12px;letter-spacing:.12em}}
+@media print{.tank-launch,#water,.tank-water-caption{display:none!important}}
