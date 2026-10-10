@@ -11,8 +11,7 @@ const duration = 9600;
 const endingHold = 4000, endingHoldAt = duration * .84;
 let finalSlide = false, phase = 'idle';
 let elapsed = 0, lastTime = 0, renderTime = 0, raf = 0;
-deck.configure({keyboardCondition: event => phase !== 'running' &&
-  !(event.key === ' ' && event.target.closest?.('#proceed'))});
+deck.configure({keyboardCondition: () => phase !== 'running'});
 
 function cameraStatus(text){
   $('camera-status').textContent = text;
@@ -28,20 +27,19 @@ function setPhase(next){
   const running = next === 'running';
   deckElement.inert = running;
   deckControls.inert = running;
-  $('proceed').disabled = running;
 }
 function startCamera(){
   if(!finalSlide || document.hidden) return;
   camera.setEnabled(phase === 'ready');
   // The embedded lab owns the only camera and sends its hand landmarks here.
-  camera.start().catch(error => cameraStatus(error?.message || 'Camera unavailable. Proceed still works.'));
+  camera.start().catch(error => cameraStatus(error?.message || 'Camera unavailable. Allow camera access to use the clap gesture.'));
 }
 function hideWater(){
   $('water').hidden = true;
   $('water').style.opacity = '0';
   delete document.body.dataset.waveSubphase;
 }
-function begin(source = 'button'){
+function begin(source = 'gesture'){
   if(!finalSlide || phase !== 'ready') return;
   camera.setEnabled(false);
   elapsed = 0;
@@ -59,8 +57,8 @@ function finish({focus = true} = {}){
   setPhase(finalSlide ? 'ready' : 'idle');
   if(finalSlide){
     camera.setEnabled(true);
-    $('wave-status').textContent = 'Wave complete. Proceed or repeat the hand clap gesture to play again.';
-    if(focus) $('proceed').focus({preventScroll:true});
+    $('wave-status').textContent = 'Wave complete. Separate your hands and clap again to replay.';
+    if(focus) $('wave-status').focus({preventScroll:true});
   }
 }
 function syncSlide(){
@@ -99,7 +97,6 @@ function frame(now){
   }
   raf = requestAnimationFrame(frame);
 }
-$('proceed').addEventListener('click',event=>{event.stopPropagation();begin();});
 document.addEventListener('keydown',event=>{
   if(phase !== 'running') return;
   if(event.key==='Escape'){
