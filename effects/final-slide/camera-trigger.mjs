@@ -1,5 +1,5 @@
 /**
- * Two-arm upward sweep trigger for the presentation's final slide.
+ * Two-hand gesture trigger for the presentation's final slide.
  * The presentation starts/stops this on slide entry/exit. No frames are saved,
  * recorded, or uploaded: the video is passed directly to local WASM inference.
  * First use needs internet for these pinned library/model downloads.
@@ -12,21 +12,21 @@
  * stop() permits a new session; dispose() permanently disables this instance.
  *
  * Verified 2026-10-10 against Google's guide, API, and maintained example:
- * https://developers.google.com/edge/mediapipe/solutions/vision/pose_landmarker/web_js
- * https://developers.google.com/edge/api/mediapipe/js/tasks-vision.poselandmarker
- * https://github.com/google-ai-edge/mediapipe-samples-web/blob/main/src/workers/pose-landmarker.worker.ts
+ * https://developers.google.com/edge/mediapipe/solutions/vision/hand_landmarker/web_js
+ * https://developers.google.com/edge/api/mediapipe/js/tasks-vision.handlandmarker
+ * https://github.com/google-ai-edge/mediapipe-samples-web/blob/main/src/workers/hand-landmarker.worker.ts
  * https://github.com/google-ai-edge/mediapipe-samples-web/blob/main/package.json
  */
 
-import { ArmSweep } from './arm-sweep.mjs';
+import { HandSweep } from './hand-sweep.mjs?v=b77d94e5ba45';
 
 const VERSION = "1.1.0";
 const LIBRARY_URL = `https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@${VERSION}/vision_bundle.mjs`;
 const WASM_URL = `https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@${VERSION}/wasm`;
-const MODEL_URL = "https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task";
+const MODEL_URL = "https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task";
 const FRAME_INTERVAL_MS = 1000 / 12;
 const STARTUP_GRACE_MS = 600;
-const MAX_POSE_GAP_MS = 350;
+const MAX_HAND_GAP_MS = 350;
 const FRAME_TIMEOUT_MS = 8000;
 const LOAD_TIMEOUT_MS = 60000;
 
@@ -65,7 +65,7 @@ export class CameraTrigger {
     session.graceUntil = this._window.performance.now() + STARTUP_GRACE_MS;
     this._progress(session, 0);
     if (session.phase === 'tracking') this._status(session,
-      this._enabled ? 'Stretch both arms horizontally, then sweep them overhead.' : 'Camera on. Gesture detection paused.',
+      this._enabled ? 'Hold both hands horizontally, then turn them upright and bring them closer.' : 'Camera on. Gesture detection paused.',
       this._enabled ? 'ready' : 'paused');
   }
 
@@ -88,7 +88,7 @@ export class CameraTrigger {
     const session = {
       controller: new AbortController(), cancelled: false, triggered: false,
       stream: null, recognizer: null, raf: null, trackListeners: [],
-      progress: -1, lastStatus: "", phase: "permission", detector: new ArmSweep(),
+      progress: -1, lastStatus: "", phase: "permission", detector: new HandSweep(),
       lastInferenceAt: -Infinity, lastVideoTime: -1,
     };
     this._session = session;
@@ -197,7 +197,7 @@ export class CameraTrigger {
       if (!this._isCurrent(session)) return false;
 
       session.phase = "model";
-      this._status(session, "Loading body tracking. First use needs internet; video stays local.", "loading");
+      this._status(session, "Loading hand tracking. First use needs internet; video stays local.", "loading");
       const recognizer = await this._wait(session, this._loadRecognizer(session), LOAD_TIMEOUT_MS);
       if (!this._isCurrent(session)) { closeRecognizer(recognizer); return false; }
       session.recognizer = recognizer;
@@ -206,7 +206,7 @@ export class CameraTrigger {
       session.graceUntil = now + STARTUP_GRACE_MS;
       session.lastFreshFrameAt = now;
       this._status(session,
-        this._enabled ? 'Step back. Hold both arms horizontal, then sweep them overhead.' : 'Camera on. Gesture detection paused.',
+        this._enabled ? 'Hold both hands horizontally, then turn them upright and bring them closer.' : 'Camera on. Gesture detection paused.',
         this._enabled ? 'ready' : 'paused');
       if (this._isCurrent(session)) this._schedule(session);
       return this._isCurrent(session);
@@ -236,17 +236,16 @@ export class CameraTrigger {
   }
 
   async _loadRecognizer(session) {
-    const { FilesetResolver, PoseLandmarker } = await import(LIBRARY_URL);
+    const { FilesetResolver, HandLandmarker } = await import(LIBRARY_URL);
     if (!this._isCurrent(session)) throw abortError();
     const fileset = await FilesetResolver.forVisionTasks(WASM_URL);
     if (!this._isCurrent(session)) throw abortError();
-    const recognizer = await PoseLandmarker.createFromOptions(fileset, {
+    const recognizer = await HandLandmarker.createFromOptions(fileset, {
       baseOptions: { modelAssetPath: MODEL_URL, delegate: "CPU" },
-      runningMode: "VIDEO", numPoses: 1,
-      minPoseDetectionConfidence: 0.6,
-      minPosePresenceConfidence: 0.6,
+      runningMode: "VIDEO", numHands: 2,
+      minHandDetectionConfidence: 0.6,
+      minHandPresenceConfidence: 0.6,
       minTrackingConfidence: 0.6,
-      outputSegmentationMasks: false,
     });
     if (!this._isCurrent(session)) {
       closeRecognizer(recognizer);
@@ -274,7 +273,7 @@ export class CameraTrigger {
         this._finish(session, "The camera stopped sending frames. Try again, or continue without it.", "error");
         return;
       }
-      if (now - session.lastFreshFrameAt > MAX_POSE_GAP_MS) this._resetSequence(session);
+      if (now - session.lastFreshFrameAt > MAX_HAND_GAP_MS) this._resetSequence(session);
       if (now - session.lastInferenceAt >= FRAME_INTERVAL_MS &&
           this.video.readyState >= 2 && this.video.currentTime !== session.lastVideoTime) {
         session.lastInferenceAt = now;
@@ -282,24 +281,25 @@ export class CameraTrigger {
         session.lastFreshFrameAt = now;
         if (this._enabled && now >= session.graceUntil) {
           const result = session.recognizer.detectForVideo(this.video, now);
-          const sweep = session.detector.update(result.landmarks?.[0], now,
+          const sweep = session.detector.update(result.landmarks, now,
             {width: this.video.videoWidth, height: this.video.videoHeight});
           this._status(session, sweep.message, sweep.phase);
           this._progress(session, sweep.progress);
           if (sweep.triggered && this._enabled && this._isCurrent(session) && !session.triggered) {
             session.triggered = true;
             // Keep the preview alive while the effect runs. The host re-enables
-            // recognition afterwards; reset prevents static overhead retriggers.
+            // recognition afterwards; reset requires a new hand gesture.
             this._enabled = false;
             session.detector.reset();
-            this._status(session, 'Arm sweep confirmed. Camera stays on.', 'triggered');
-            this._notify(this.onTrigger);
+            this._status(session, 'Hand gesture confirmed. Camera stays on.', 'triggered');
+            if (this._isCurrent(session) && session.triggered) this._notify(this.onTrigger);
           }
         }
       }
       this._schedule(session);
     } catch (error) {
-      this._finish(session, "Body tracking stopped. Reload the page or continue without the camera.", "error");
+      console.warn("Hand tracking inference failed:", error);
+      this._finish(session, "Hand tracking stopped. Reload the page or continue without the camera.", "error");
     }
   }
 
@@ -334,7 +334,7 @@ export class CameraTrigger {
       if (error?.name === "NotReadableError" || error?.name === "TrackStartError") return "The camera is busy or unavailable. Close other camera apps and try again, or continue without it.";
       return "The camera could not start. Try again, or continue without it.";
     }
-    if (phase === "model") return "Body tracking could not load. Check your internet connection and reload, or continue without the camera.";
+    if (phase === "model") return "Hand tracking could not load. Check your internet connection and reload, or continue without the camera.";
     return "The camera preview could not start. Try again, or continue without it.";
   }
 }

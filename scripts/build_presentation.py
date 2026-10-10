@@ -6,6 +6,7 @@ The source PPTX is read only. PowerPoint owns the slide artwork and typography.
 import hashlib
 import html
 import json
+import re
 from pathlib import Path
 import shutil
 import sys
@@ -163,6 +164,13 @@ for number in sorted(int(key) for key in slide_overrides if int(key) > inventory
 </body></html>
 ''', encoding="utf-8", newline="\n")
 (ROOT / "slides" / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
+# Fingerprint the hand detector dependency chain before the entry script.
+for importer, dependency in (("camera-trigger.mjs", "hand-sweep.mjs"), ("final-slide.mjs", "camera-trigger.mjs")):
+    module = ROOT / "effects/final-slide" / importer
+    version = hashlib.sha256((module.parent / dependency).read_bytes()).hexdigest()[:12]
+    code = module.read_text(encoding="utf-8")
+    code = re.sub(r"(?<=from )'\./" + re.escape(dependency) + r"(?:\?v=[^']+)?'", "'./" + dependency + "?v=" + version + "'", code)
+    module.write_text(code, encoding="utf-8", newline="\n")
 # Bust cached controls/styles when this deck replaces an older published version.
 page = ROOT / "index.html"
 content = page.read_text(encoding="utf-8")

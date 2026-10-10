@@ -1,5 +1,5 @@
 import {WaterTank} from './water-tank.mjs';
-import {CameraTrigger} from './camera-trigger.mjs';
+import {CameraTrigger} from './camera-trigger.mjs?v=3b9eccd36a32';
 
 const $ = id => document.getElementById(id);
 const deck = window.workshopDeck;
@@ -62,14 +62,14 @@ function begin(source = 'button'){
   tank.resize();
   setPhase('running');
   $('pause').focus({preventScroll:true});
-  $('wave-status').textContent = source === 'gesture' ? 'Two-arm sweep detected. The wave is starting.' : 'The wave is starting.';
+  $('wave-status').textContent = source === 'gesture' ? 'Hand clap gesture detected. The wave is starting.' : 'The wave is starting.';
 }
 function finish({focus = true} = {}){
   hideWater();
   setPhase(finalSlide ? 'ready' : 'idle');
   if(finalSlide){
     camera.setEnabled(true);
-    $('wave-status').textContent = 'Wave complete. Proceed or repeat the two-arm sweep to play again.';
+    $('wave-status').textContent = 'Wave complete. Proceed or repeat the hand clap gesture to play again.';
     if(focus) $('proceed').focus({preventScroll:true});
   }
 }
