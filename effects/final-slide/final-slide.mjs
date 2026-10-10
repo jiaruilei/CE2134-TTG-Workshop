@@ -1,4 +1,4 @@
-import {WaterTank} from './water-tank.mjs';
+import {WaterTank} from './water-tank.mjs?v=d0630a41cd57';
 import {SharedHandInput} from './shared-hand-input.mjs?v=1d5817721d90';
 
 const $ = id => document.getElementById(id);
@@ -47,6 +47,7 @@ function begin(source = 'gesture'){
   if(!finalSlide || phase !== 'ready') return;
   camera.setEnabled(false);
   elapsed = 0;
+  renderTime = 0;
   captionAnnounced = false;
   $('water').hidden = false;
   $('water').style.opacity = '1';

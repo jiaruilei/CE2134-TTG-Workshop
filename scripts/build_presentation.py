@@ -164,8 +164,12 @@ for number in sorted(int(key) for key in slide_overrides if int(key) > inventory
 </body></html>
 ''', encoding="utf-8", newline="\n")
 (ROOT / "slides" / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
-# Fingerprint the hand detector dependency chain before the entry script.
-for importer, dependency in (("shared-hand-input.mjs", "hand-sweep.mjs"), ("final-slide.mjs", "shared-hand-input.mjs")):
+# Fingerprint both runtime dependency chains before the entry script.
+for importer, dependency in (("shared-hand-input.mjs", "hand-sweep.mjs"),
+                             ("water-tank.mjs", "wave-physics.mjs"),
+                             ("water-tank.mjs", "seagrass.mjs"),
+                             ("final-slide.mjs", "shared-hand-input.mjs"),
+                             ("final-slide.mjs", "water-tank.mjs")):
     module = ROOT / "effects/final-slide" / importer
     version = hashlib.sha256((module.parent / dependency).read_bytes()).hexdigest()[:12]
     code = module.read_text(encoding="utf-8")
