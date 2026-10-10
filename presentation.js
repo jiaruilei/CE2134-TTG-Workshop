@@ -79,20 +79,6 @@ document.querySelectorAll('.web-panel').forEach(panel => {
     form.addEventListener('keydown', event => event.stopPropagation());
   }
 });
-document.querySelectorAll('.phygital-wordmark').forEach(wordmark => {
-  wordmark.addEventListener('keydown', event => {
-    if (event.key === ' ') event.stopPropagation();
-  });
-  wordmark.addEventListener('click', event => {
-    event.stopPropagation();
-    // Restart the same animation that plays automatically on slide entry.
-    wordmark.classList.add('motion-requested');
-    const words = wordmark.querySelectorAll('.phygital-source, .phygital-result');
-    words.forEach(word => { word.style.animation = 'none'; });
-    void wordmark.offsetWidth;
-    words.forEach(word => { word.style.animation = ''; });
-  });
-});
 function sync() {
   const index = deck.getIndices().h;
   const total = deck.getTotalSlides();
@@ -112,8 +98,6 @@ function sync() {
 }
 function enterSlide() {
   const slide = deck.getCurrentSlide();
-  // The presenter requested this brief animation on every entry to slide 12.
-  slide?.querySelector('.phygital-wordmark')?.classList.add('motion-requested');
   const panel = slide?.querySelector('.web-panel');
   if (panel) setExpanded(panel, panel.dataset.autoExpand !== 'false');
   sync();
@@ -143,7 +127,6 @@ document.addEventListener('keydown', event => {
   }
 });
 deck.on('slidechanged', event => {
-  event.previousSlide?.querySelector('.phygital-wordmark')?.classList.remove('motion-requested');
   event.previousSlide?.querySelectorAll('.is-expanded').forEach(panel => setExpanded(panel, false));
   enterSlide();
 });

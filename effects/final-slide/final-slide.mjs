@@ -8,8 +8,11 @@ const deckControls = document.querySelector('.deck-controls');
 // Keep the GPU available to the live lab until the wave is actually requested.
 let tank = null;
 const duration = 9600;
-const endingHold = 4000, endingHoldAt = duration * .84;
+// Allow the 3.6-second text merge, then hold PHYGITAL for over four seconds.
+const endingHold = 6000, endingHoldAt = duration * .84;
+const captionStart = duration * .79;
 let finalSlide = false, phase = 'idle';
+let captionAnnounced = false;
 let elapsed = 0, lastTime = 0, renderTime = 0, raf = 0;
 deck.configure({keyboardCondition: () => phase !== 'running'});
 
@@ -38,11 +41,13 @@ function hideWater(){
   $('water').hidden = true;
   $('water').style.opacity = '0';
   delete document.body.dataset.waveSubphase;
+  $('water-caption').style.removeProperty('--merge-delay');
 }
 function begin(source = 'gesture'){
   if(!finalSlide || phase !== 'ready') return;
   camera.setEnabled(false);
   elapsed = 0;
+  captionAnnounced = false;
   $('water').hidden = false;
   $('water').style.opacity = '1';
   if(!tank) tank = new WaterTank($('water'));
@@ -83,7 +88,7 @@ function frame(now){
     if(phase === 'running') elapsed += dt;
   }
   if(phase === 'running'){
-    // Hold the fully immersed caption while the water keeps moving.
+    // Hold the water fully immersed while the words merge and remain readable.
     const timelineElapsed = elapsed <= endingHoldAt ? elapsed : Math.max(endingHoldAt,elapsed-endingHold);
     const fraction = Math.min(1,timelineElapsed/duration);
     const filling = Math.min(1,fraction/.76);
@@ -92,7 +97,13 @@ function frame(now){
     const reveal = Math.max(0,entry*entry*(3-2*entry)*exit*exit*(3-2*exit));
     $('water').style.opacity = String(fraction>.90 ? Math.max(0,1-(fraction-.90)/.10) : 1);
     tank.render({time:renderTime,progress,intensity:1,reveal});
+    // Sample paused CSS keyframes from the wave clock, including tab suspension.
+    $('water-caption').style.setProperty('--merge-delay', `${-Math.max(0,elapsed-captionStart)}ms`);
     document.body.dataset.waveSubphase = fraction>.79 && fraction<.94 ? 'immersed' : 'filling';
+    if(!captionAnnounced && elapsed>=captionStart){
+      captionAnnounced = true;
+      $('wave-status').textContent = 'Physical plus Digital becomes Phygital.';
+    }
     if(fraction===1) finish();
   }
   raf = requestAnimationFrame(frame);
