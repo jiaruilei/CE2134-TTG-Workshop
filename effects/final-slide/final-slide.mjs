@@ -1,5 +1,5 @@
 import {WaterTank} from './water-tank.mjs';
-import {CameraTrigger} from './camera-trigger.mjs?v=3b9eccd36a32';
+import {SharedHandInput} from './shared-hand-input.mjs?v=1d5817721d90';
 
 const $ = id => document.getElementById(id);
 const deck = window.workshopDeck;
@@ -19,8 +19,8 @@ function cameraStatus(text, code = 'ready'){
   $('camera-state').setAttribute('aria-label', text);
   $('camera-state').title = text;
 }
-const camera = new CameraTrigger({
-  video: $('camera-video'), onStatus: cameraStatus,
+const camera = new SharedHandInput({
+  frame: document.querySelector('#slide-12 .summary-lab iframe'), onStatus: cameraStatus,
   onProgress(value){
     const progress = Math.max(0, Math.min(100, Math.round(Number(value)*100)));
     $('gesture-progress').style.width = progress+'%';
@@ -41,7 +41,7 @@ function setPhase(next){
 function startCamera(){
   if(!finalSlide || document.hidden) return;
   camera.setEnabled(phase === 'ready');
-  // Entering slide12 enables the camera. Browser permission is still required.
+  // The embedded lab owns the only camera and sends its hand landmarks here.
   camera.start().catch(error => cameraStatus(error?.message || 'Camera unavailable. Proceed still works.', 'error'));
 }
 function hideWater(){

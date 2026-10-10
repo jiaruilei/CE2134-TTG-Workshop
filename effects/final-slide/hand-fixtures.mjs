@@ -1,6 +1,6 @@
 // Synthetic image landmarks for tests; no camera images or personal data.
 export function hands(progress = 0, {aspect = 4/3, mirror = false, swap = false, roll = 0,
-  leftProgress = progress, rightProgress = progress, converge = true} = {}) {
+  leftProgress = 1, rightProgress = 1, converge = true} = {}) {
   const pair = [-1, 1].map((side, i) => {
     const p = i === 0 ? leftProgress : rightProgress;
     const angle = p * Math.PI / 2, size = .075;
