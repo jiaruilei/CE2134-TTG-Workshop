@@ -164,10 +164,15 @@ for number in sorted(int(key) for key in slide_overrides if int(key) > inventory
 </body></html>
 ''', encoding="utf-8", newline="\n")
 (ROOT / "slides" / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
+# Fingerprint the local atlas before its module dependency chain.
+atlas_module = ROOT / "effects/final-slide/mangroves.mjs"
+atlas_version = hashlib.sha256((atlas_module.parent / "assets/mangrove-saplings.png").read_bytes()).hexdigest()[:12]
+atlas_code = re.sub(r"assets/mangrove-saplings\.png(?:\?v=[^']+)?", "assets/mangrove-saplings.png?v=" + atlas_version, atlas_module.read_text(encoding="utf-8"))
+atlas_module.write_text(atlas_code, encoding="utf-8", newline="\n")
 # Fingerprint both runtime dependency chains before the entry script.
 for importer, dependency in (("shared-hand-input.mjs", "hand-sweep.mjs"),
                              ("water-tank.mjs", "wave-physics.mjs"),
-                             ("water-tank.mjs", "seagrass.mjs"),
+                             ("water-tank.mjs", "mangroves.mjs"),
                              ("final-slide.mjs", "shared-hand-input.mjs"),
                              ("final-slide.mjs", "water-tank.mjs")):
     module = ROOT / "effects/final-slide" / importer

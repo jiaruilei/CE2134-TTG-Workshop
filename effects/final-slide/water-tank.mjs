@@ -1,9 +1,22 @@
 import {WaveField, sampleWave, sampleFlow, WAVE_GLSL} from './wave-physics.mjs?v=54ffb3769204';
-import {SeagrassBed} from './seagrass.mjs?v=86e77970fce4';
+import {MangroveStand, MANGROVE_ATLAS_URL} from './mangroves.mjs?v=e982038c5df7';
+
+// Decode while the lecture is running, without allocating a WebGL context.
+let atlasPromise;
+export function preloadMangroves(){
+  if(!atlasPromise) atlasPromise=new Promise(resolve=>{
+    if(typeof Image==='undefined'){resolve(null);return;}
+    const image=new Image();
+    image.onload=()=>resolve(image);
+    image.onerror=()=>{console.warn('Mangrove atlas could not be loaded.');resolve(null);};
+    image.src=MANGROVE_ATLAS_URL;
+  });
+  return atlasPromise;
+}
 
 /**
  * Perspective aquarium: analytic room geometry and a refractive 3D water surface.
- * No libraries, images, network requests, animation loop, or document styling.
+ * One local transparent plant atlas; no libraries, animation loop or document styling.
  * render({time: seconds, progress: 0..1, intensity: 1, reveal: 0..1});
  * reveal=0 clears the canvas. Eight bounded surface refinements; 1.2M pixel cap.
  */
@@ -17,7 +30,7 @@ export class WaterTank {
     this.ready=false;
     this.particleData=new Float32Array(60*7);
     this.waveField=new WaveField();
-    this.seagrass=new SeagrassBed();
+    this.mangroves=new MangroveStand();
     this.resources=[];
     try {
       this.gl=canvas.getContext('webgl', {alpha:true, antialias:false, depth:false,
@@ -37,6 +50,12 @@ export class WaterTank {
       this.initialize();
     }
     this.resize();
+    preloadMangroves().then(image=>{
+      if(this.disposed||!image)return;
+      this.plantImage=image;
+      if(this.fallback)this.fallback.setImage(image);
+      else if(this.ready&&!this.lost)this.uploadPlantTexture(image);
+    });
   }
   initialize() {
     const gl=this.gl;
@@ -44,18 +63,27 @@ export class WaterTank {
     try {
       this.scene=this.program(VERTEX,FRAGMENT);
       this.particles=this.program(PARTICLE_VERTEX,PARTICLE_FRAGMENT);
-      this.grass=this.program(GRASS_VERTEX,GRASS_FRAGMENT);
+      this.plants=this.program(MANGROVE_VERTEX,MANGROVE_FRAGMENT);
       this.quad=gl.createBuffer();
       this.particleBuffer=gl.createBuffer();
-      this.grassBuffer=gl.createBuffer();
-      this.resources.push(['buffer',this.quad],['buffer',this.particleBuffer],['buffer',this.grassBuffer]);
+      this.plantsBuffer=gl.createBuffer();
+      this.resources.push(['buffer',this.quad],['buffer',this.particleBuffer],['buffer',this.plantsBuffer]);
       gl.bindBuffer(gl.ARRAY_BUFFER,this.quad);
       gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
       this.sceneLocations=locations(gl,this.scene,['uResolution','uTime','uProgress','uIntensity','uReveal','uWaveLevel','uWavePhase','uWaveAmplitude']);
       this.particleLocations=locations(gl,this.particles,['uResolution','uReveal']);
-      this.grassLocations=locations(gl,this.grass,['uResolution','uReveal','uWaveLevel','uWavePhase','uWaveAmplitude']);
-      this.grassPosition=gl.getAttribLocation(this.grass,'aPosition');
-      this.grassColor=gl.getAttribLocation(this.grass,'aColor');
+      this.plantsLocations=locations(gl,this.plants,['uGround','uAtlas','uResolution','uReveal','uWaveLevel','uWavePhase','uWaveAmplitude']);
+      this.plantsPosition=gl.getAttribLocation(this.plants,'aPosition');
+      this.plantsColor=gl.getAttribLocation(this.plants,'aColor');
+      this.plantsUV=gl.getAttribLocation(this.plants,'aUV');
+      this.plantTexture=gl.createTexture();this.resources.push(['texture',this.plantTexture]);
+      gl.bindTexture(gl.TEXTURE_2D,this.plantTexture);
+      gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+      gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,1,1,0,gl.RGBA,gl.UNSIGNED_BYTE,new Uint8Array(4));
+      if(this.plantImage)this.uploadPlantTexture(this.plantImage);
       this.scenePosition=gl.getAttribLocation(this.scene,'aPosition');
       this.particlePosition=gl.getAttribLocation(this.particles,'aPosition');
       this.particleInfo=gl.getAttribLocation(this.particles,'aInfo');
@@ -82,11 +110,12 @@ export class WaterTank {
     replacement.dataset.rendererReason=reason;
     previous.replaceWith(replacement);
     if(this.gl&&!this.lost){
-      for(const[type,item]of this.resources)type==='buffer'?this.gl.deleteBuffer(item):this.gl.deleteProgram(item);
+      for(const[type,item]of this.resources)type==='buffer'?this.gl.deleteBuffer(item):type==='texture'?this.gl.deleteTexture(item):this.gl.deleteProgram(item);
       this.gl.getExtension('WEBGL_lose_context')?.loseContext();
     }
     this.resources=[];this.gl=null;this.ready=false;this.canvas=replacement;
     this.fallback=new ProjectedWater(replacement);
+    if(this.plantImage)this.fallback.setImage(this.plantImage);
     if(this.latestFrame)this.fallback.render(this.latestFrame);
   }
   program(vertexSource,fragmentSource) {
@@ -126,12 +155,12 @@ export class WaterTank {
     const p=clamp(finite(progress),0,1),strength=clamp(finite(intensity,1),0,1.5);
     const visibility=clamp(finite(reveal),0,1),t=finite(time);
     this.waveFrame=this.waveField.update({time:t,progress:p,intensity:strength});
-    const grassMesh=this.seagrass.update({time:t,halfWidth:4.875*this.width/this.height,
+    const plantMesh=this.mangroves.update({time:t,halfWidth:4.875*this.width/this.height,
       sampleWater:(x,y,z)=>{
         const flow=sampleFlow(x,y,z,this.waveFrame);
         return {height:sampleWave(x,z,this.waveFrame).height,velocityX:flow.x,velocityY:flow.y,velocityZ:flow.z};
       }});
-    this.latestFrame={time:t,progress:p,intensity:strength,reveal:visibility,waveFrame:this.waveFrame,grassMesh};
+    this.latestFrame={time:t,progress:p,intensity:strength,reveal:visibility,waveFrame:this.waveFrame,plantMesh};
     if(this.fallback)return this.fallback.render(this.latestFrame);
     if(this.lost||!this.ready)return;
     const gl=this.gl;
@@ -157,7 +186,7 @@ export class WaterTank {
       }
       this.canvas.dataset.rendererVerified='true';
     }
-    this.drawGrass(grassMesh,visibility);
+    this.drawMangroves(plantMesh,visibility);
     this.drawParticles(t,p,strength,visibility);
   }
   drawParticles(time,progress,intensity,reveal) {
@@ -192,18 +221,32 @@ export class WaterTank {
     this.gl.uniform4fv(uniforms.uWavePhase,this.waveFrame.phases);
     this.gl.uniform4fv(uniforms.uWaveAmplitude,this.waveFrame.amplitudes);
   }
-  drawGrass(mesh,reveal) {
-    if(!mesh?.count)return;
-    const gl=this.gl;gl.useProgram(this.grass);gl.bindBuffer(gl.ARRAY_BUFFER,this.grassBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER,mesh.vertices,gl.DYNAMIC_DRAW);
-    gl.enableVertexAttribArray(this.grassPosition);gl.enableVertexAttribArray(this.grassColor);
-    gl.vertexAttribPointer(this.grassPosition,3,gl.FLOAT,false,28,0);
-    gl.vertexAttribPointer(this.grassColor,4,gl.FLOAT,false,28,12);
-    gl.uniform2f(this.grassLocations.uResolution,this.canvas.width,this.canvas.height);
-    gl.uniform1f(this.grassLocations.uReveal,reveal);this.uploadWave(this.grassLocations);
+  uploadPlantTexture(image){
+    const gl=this.gl;gl.bindTexture(gl.TEXTURE_2D,this.plantTexture);
+    // UVs follow image coordinates (top is v=0), with unpremultiplied alpha.
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,false);
+    gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL,false);
+    gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,image);
+  }
+  drawMangroves(mesh,reveal) {
+    if(!mesh?.count||!this.plantImage)return;
+    const gl=this.gl;gl.useProgram(this.plants);gl.bindBuffer(gl.ARRAY_BUFFER,this.plantsBuffer);
+    gl.enableVertexAttribArray(this.plantsPosition);gl.enableVertexAttribArray(this.plantsUV);gl.enableVertexAttribArray(this.plantsColor);
+    gl.vertexAttribPointer(this.plantsPosition,3,gl.FLOAT,false,36,0);
+    gl.vertexAttribPointer(this.plantsUV,2,gl.FLOAT,false,36,12);
+    gl.vertexAttribPointer(this.plantsColor,4,gl.FLOAT,false,36,20);
+    gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,this.plantTexture);
+    gl.uniform1i(this.plantsLocations.uAtlas,0);
+    gl.uniform2f(this.plantsLocations.uResolution,this.canvas.width,this.canvas.height);
+    gl.uniform1f(this.plantsLocations.uReveal,reveal);this.uploadWave(this.plantsLocations);
     gl.enable(gl.BLEND);gl.blendFuncSeparate(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA,gl.ONE,gl.ONE_MINUS_SRC_ALPHA);
-    gl.drawArrays(gl.TRIANGLES,0,mesh.count);
-    gl.disableVertexAttribArray(this.grassPosition);gl.disableVertexAttribArray(this.grassColor);gl.disable(gl.BLEND);
+    // Small contact shadows attach the photographic roots to the tank bed.
+    const ground=groundMesh(mesh);
+    gl.uniform1f(this.plantsLocations.uGround,1);
+    gl.bufferData(gl.ARRAY_BUFFER,ground,gl.DYNAMIC_DRAW);gl.drawArrays(gl.TRIANGLES,0,ground.length/9);
+    gl.uniform1f(this.plantsLocations.uGround,0);
+    gl.bufferData(gl.ARRAY_BUFFER,mesh.vertices,gl.DYNAMIC_DRAW);gl.drawArrays(gl.TRIANGLES,0,mesh.count);
+    gl.disableVertexAttribArray(this.plantsPosition);gl.disableVertexAttribArray(this.plantsUV);gl.disableVertexAttribArray(this.plantsColor);gl.disable(gl.BLEND);
   }
   dispose() {
     if(this.disposed)return;this.disposed=true;
@@ -211,7 +254,7 @@ export class WaterTank {
     this.canvas.removeEventListener('webglcontextlost',this.onLost);
     this.canvas.removeEventListener('webglcontextrestored',this.onRestored);
     if(this.gl&&!this.lost) {
-      for(const[type,item]of this.resources)type==='buffer'?this.gl.deleteBuffer(item):this.gl.deleteProgram(item);
+      for(const[type,item]of this.resources)type==='buffer'?this.gl.deleteBuffer(item):type==='texture'?this.gl.deleteTexture(item):this.gl.deleteProgram(item);
       this.gl.clearColor(0,0,0,0);this.gl.clear(this.gl.COLOR_BUFFER_BIT);
     }
     this.resources=[];this.particleData=null;
@@ -409,29 +452,46 @@ void main(){
 }
 `;
 
-const GRASS_VERTEX=`
+const MANGROVE_VERTEX=`
 precision highp float;
 attribute vec3 aPosition;
+attribute vec2 aUV;
 attribute vec4 aColor;
 uniform vec2 uResolution;
 uniform float uReveal;
+varying vec2 vUV;
 varying vec4 vColor;
-${WAVE_GLSL}
+varying vec3 vWorld;
 void main(){
   float perspective=11.5/(11.5-aPosition.z),aspect=uResolution.x/uResolution.y;
   vec2 projected=vec2(aPosition.x*perspective/(4.875*aspect),(3.2+(aPosition.y-3.2)*perspective-0.125)/4.875);
   gl_Position=vec4(projected,0.0,1.0);
-  float depth=max(0.0,water(aPosition.xz).x-aPosition.y);
-  float wet=smoothstep(0.0,0.16,depth);
-  vec3 transmission=exp(-vec3(0.28,0.105,0.07)*(depth*0.18+(0.5-aPosition.z)*0.10));
-  vec3 underwater=aColor.rgb*transmission+vec3(0.018,0.22,0.29)*(1.0-transmission);
-  vColor=vec4(mix(aColor.rgb,underwater,wet),aColor.a*uReveal);
+  vUV=aUV;vWorld=aPosition;vColor=vec4(aColor.rgb,aColor.a*uReveal);
 }
 `;
-const GRASS_FRAGMENT=`
-precision mediump float;
+const MANGROVE_FRAGMENT=`
+precision highp float;
+uniform sampler2D uAtlas;
+uniform float uGround;
+varying vec2 vUV;
 varying vec4 vColor;
-void main(){gl_FragColor=vColor;}
+varying vec3 vWorld;
+${WAVE_GLSL}
+void main(){
+  vec4 plant;
+  if(uGround>0.5){
+    vec2 uv=vUV*2.0-1.0;
+    float radius=length(uv);
+    float edge=1.0-smoothstep(0.48,1.0,radius);
+    plant=vec4(vec3(0.06,0.085,0.058),edge*0.70)*vColor;
+  }else plant=texture2D(uAtlas,vUV)*vColor;
+  if(plant.a<0.015)discard;
+  float depth=max(0.0,water(vWorld.xz).x-vWorld.y);
+  float wet=smoothstep(0.0,0.16,depth);
+  vec3 transmission=exp(-vec3(0.28,0.105,0.07)*(depth*0.18+(0.5-vWorld.z)*0.10));
+  vec3 underwater=plant.rgb*transmission+vec3(0.018,0.22,0.29)*(1.0-transmission);
+  gl_FragColor=vec4(mix(plant.rgb,underwater,wet),plant.a);
+}
 `;
 
 /** Projected Canvas mesh fallback for browsers where WebGL is disabled. */
@@ -452,7 +512,7 @@ class ProjectedWater {
     vertices.forEach((v,i)=>{const p=this.project(...v);i?ctx.lineTo(...p):ctx.moveTo(...p);});ctx.closePath();
     if(fill){ctx.fillStyle=fill;ctx.fill();}if(stroke){ctx.strokeStyle=stroke;ctx.stroke();}
   }
-  render({time,progress,intensity,reveal,waveFrame,grassMesh}){
+  render({time,progress,intensity,reveal,waveFrame,plantMesh}){
     const ctx=this.ctx;if(!ctx)return;
     ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
     if(reveal<0.001)return;
@@ -550,7 +610,7 @@ class ProjectedWater {
       ctx.beginPath();ctx.moveTo(...this.project(n,-4.74,0));ctx.lineTo(...this.project(n,-4.74,-8.5));ctx.stroke();
     }
     for(let z=0;z>=-8;z--){ctx.beginPath();ctx.moveTo(...this.project(-x,-4.74,z));ctx.lineTo(...this.project(x,-4.74,z));ctx.stroke();}
-    this.drawGrass(grassMesh,waveFrame,reveal);
+    this.drawMangroves(plantMesh,waveFrame,reveal);
     for(let i=0;i<47;i++){
       const age=fract(random(i+521)+time*(.028+random(i+789)*.018));
       const px=(random(i+317)*2-1)*x*.94,z=-7.8+random(i+814)*(7.8+front),y=-4.5+age*10.5;
@@ -561,28 +621,53 @@ class ProjectedWater {
     }
     ctx.globalAlpha=1;
   }
-  drawGrass(mesh,waveFrame,reveal){
-    if(!mesh?.count)return;
-    const ctx=this.ctx,data=mesh.vertices;
-    ctx.globalAlpha=reveal;ctx.lineWidth=.35;
+  setImage(image){
+    this.plantImage=image;
+    // Keep the atlas alpha while giving submerged leaves a blue-green cast.
+    this.wetImage=document.createElement('canvas');
+    this.wetImage.width=image.width;this.wetImage.height=image.height;
+    const ctx=this.wetImage.getContext('2d');
+    ctx.drawImage(image,0,0);ctx.globalCompositeOperation='source-atop';
+    ctx.fillStyle='rgba(7,93,110,.30)';ctx.fillRect(0,0,image.width,image.height);
+  }
+  drawMangroves(mesh,waveFrame,reveal){
+    if(!mesh?.count||!this.plantImage)return;
+    const ctx=this.ctx,data=mesh.vertices,image=this.plantImage;
+    for(const plant of mesh.plants){
+      const contact=rootContact(plant),[cx,cy]=this.project(contact.x,-4.735,contact.z);
+      const right=this.project(contact.x+contact.rx,-4.735,contact.z);
+      const far=this.project(contact.x,-4.735,contact.z-contact.rz);
+      const rx=Math.abs(right[0]-cx),ry=Math.max(1,Math.abs(far[1]-cy));
+      ctx.save();ctx.translate(cx,cy);ctx.scale(rx,ry);
+      const shadow=ctx.createRadialGradient(0,0,0,0,0,1);
+      shadow.addColorStop(0,'rgba(9,19,13,.72)');shadow.addColorStop(.5,'rgba(9,19,13,.5)');shadow.addColorStop(1,'rgba(9,19,13,0)');
+      ctx.fillStyle=shadow;ctx.globalAlpha=reveal;ctx.beginPath();ctx.arc(0,0,1,0,Math.PI*2);ctx.fill();ctx.restore();
+    }
     for(let vertex=0;vertex<mesh.count;vertex+=3){
-      const points=[],color=[0,0,0];let alpha=0;
+      const dst=[],src=[];let wet=0;
       for(let corner=0;corner<3;corner++){
         const offset=(vertex+corner)*mesh.stride;
         const x=data[offset],y=data[offset+1],z=data[offset+2];
-        points.push(this.project(x,y,z));
-        const depth=Math.max(0,sampleWave(x,z,waveFrame).height-y),wet=smooth(0,.16,depth);
-        const distance=depth*.18+(.5-z)*.10;
-        for(let channel=0;channel<3;channel++){
-          const transmission=Math.exp(-[.28,.105,.07][channel]*distance);
-          const original=data[offset+3+channel];
-          color[channel]+=(original*(1-wet)+(original*transmission+[.018,.22,.29][channel]*(1-transmission))*wet)/3;
-        }
-        alpha+=data[offset+6]/3;
+        dst.push(this.project(x,y,z));
+        src.push([data[offset+3]*image.width,data[offset+4]*image.height]);
+        wet+=smooth(0,.22,sampleWave(x,z,waveFrame).height-y)/3;
       }
-      ctx.fillStyle=ctx.strokeStyle=`rgba(${color.map(c=>Math.round(c*255)).join(',')},${alpha})`;
-      ctx.beginPath();ctx.moveTo(...points[0]);ctx.lineTo(...points[1]);ctx.lineTo(...points[2]);ctx.closePath();ctx.fill();ctx.stroke();
+      const [a,b,c]=src,[p,q,r]=dst;
+      const denominator=(b[0]-a[0])*(c[1]-a[1])-(c[0]-a[0])*(b[1]-a[1]);
+      if(Math.abs(denominator)<.001)continue;
+      const xx=((q[0]-p[0])*(c[1]-a[1])-(r[0]-p[0])*(b[1]-a[1]))/denominator;
+      const xy=((r[0]-p[0])*(b[0]-a[0])-(q[0]-p[0])*(c[0]-a[0]))/denominator;
+      const yx=((q[1]-p[1])*(c[1]-a[1])-(r[1]-p[1])*(b[1]-a[1]))/denominator;
+      const yy=((r[1]-p[1])*(b[0]-a[0])-(q[1]-p[1])*(c[0]-a[0]))/denominator;
+      ctx.save();ctx.beginPath();ctx.moveTo(...p);ctx.lineTo(...q);ctx.lineTo(...r);ctx.closePath();ctx.clip();
+      ctx.transform(xx,yx,xy,yy,p[0]-xx*a[0]-xy*a[1],p[1]-yx*a[0]-yy*a[1]);
+      const sx=Math.min(...src.map(v=>v[0])),sy=Math.min(...src.map(v=>v[1]));
+      const sw=Math.max(...src.map(v=>v[0]))-sx,sh=Math.max(...src.map(v=>v[1]))-sy;
+      ctx.globalAlpha=reveal;ctx.drawImage(image,sx,sy,sw,sh,sx,sy,sw,sh);
+      if(wet>0){ctx.globalAlpha=reveal*wet;ctx.drawImage(this.wetImage,sx,sy,sw,sh,sx,sy,sw,sh);}
+      ctx.restore();
     }
+    ctx.globalAlpha=reveal;
   }
   dispose(){if(this.ctx){this.ctx.setTransform(1,0,0,1,0,0);this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);}this.ctx=null;}
 }
@@ -592,3 +677,18 @@ const finite=(value,fallback=0)=>Number.isFinite(value)?value:fallback;
 const fract=value=>value-Math.floor(value);
 const random=seed=>fract(Math.sin(seed*127.1+311.7)*43758.5453123);
 function smooth(min,max,value){const t=clamp((value-min)/(max-min),0,1);return t*t*(3-2*t);}
+
+function rootContact(plant){
+  const r=plant.rings,width=r[9]-r[6];
+  return {x:(r[6]+r[9])*.5+(plant.variant===0?.11:0)*width,z:plant.rootZ,rx:width*.32,rz:width*.24};
+}
+function groundMesh(mesh){
+  const data=new Float32Array(mesh.plants.length*6*9);let offset=0;
+  for(const plant of mesh.plants){
+    const contact=rootContact(plant);
+    for(const [u,v]of [[0,0],[1,0],[1,1],[0,0],[1,1],[0,1]]){
+      data.set([contact.x+(u*2-1)*contact.rx,-4.735,contact.z+(v*2-1)*contact.rz,u,v,1,1,1,1],offset);offset+=9;
+    }
+  }
+  return data;
+}
