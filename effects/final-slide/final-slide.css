@@ -9,7 +9,7 @@ body[data-wave-phase="running"] .reveal{filter:brightness(.60) saturate(.75)}
 .phygital-physical,.phygital-phy{color:#ffd09b}
 .phygital-plus{font-size:clamp(18px,3vw,42px);color:#83d5e8;transform:translate(-50%,-50%)}
 .phygital-result{font-size:clamp(32px,6.4vw,88px);letter-spacing:.025em;transform:translate(-50%,-50%)}
-.phygital-acknowledgement{position:absolute;left:0;right:0;bottom:max(28px,6vh);margin:0;padding:0 24px;text-align:center;font-size:clamp(15px,1.75vw,25px);line-height:1.5;font-weight:400;letter-spacing:.035em;opacity:0}
+.phygital-acknowledgement{position:absolute;left:0;right:0;bottom:max(28px,6vh);margin:0;padding:0 24px;text-align:center;font-size:clamp(20px,2.6vw,38px);line-height:1.5;font-weight:400;letter-spacing:.035em;opacity:0}
 /* The wave clock advances these paused keyframes so hidden tabs stay in sync. */
 body[data-wave-phase="running"] .phygital-physical{animation:physical-approach 3.6s ease-in-out both paused}
 body[data-wave-phase="running"] .phygital-digital{animation:digital-approach 3.6s ease-in-out both paused}
