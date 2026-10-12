@@ -102,7 +102,7 @@ function frame(now){
     document.body.dataset.waveSubphase = fraction>.79 && fraction<.94 ? 'immersed' : 'filling';
     if(!captionAnnounced && elapsed>=captionStart){
       captionAnnounced = true;
-      $('wave-status').textContent = 'Physical plus Digital becomes Phygital.';
+      $('wave-status').textContent = 'Physical plus Digital becomes Phygital. With support from CEE, CDE, CTLT and NUS.';
     }
     if(fraction===1) finish();
   }
