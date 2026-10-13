@@ -22,7 +22,7 @@ function validFrame(data) {
 }
 
 export class SharedHandInput {
-  constructor({frame, onStatus = () => {}, onProgress = () => {}, onTrigger = () => {}} = {}) {
+  constructor({frame, onStatus = () => {}, onProgress = () => {}, onTrigger = () => {}, onRenderStatus = () => {}} = {}) {
     if (!frame?.contentWindow || !frame.ownerDocument) throw new TypeError('SharedHandInput requires the lab iframe.');
     this.frame = frame;
     this._document = frame.ownerDocument;
@@ -31,6 +31,8 @@ export class SharedHandInput {
     if (!['https:', 'http:'].includes(url.protocol)) throw new TypeError('The lab must use HTTP or HTTPS.');
     this.origin = url.origin;
     this.onStatus = onStatus; this.onProgress = onProgress; this.onTrigger = onTrigger;
+    this.onRenderStatus = onRenderStatus;
+    this._renderPaused = false; this._renderRequestId = 0; this._renderPending = null;
     this._session = null; this._enabled = true; this._disposed = false;
     this._onMessage = event => this._receive(event);
     this._onLoad = () => { if (this.active) this._handshake(); };
@@ -60,7 +62,42 @@ export class SharedHandInput {
       this._enabled ? 'ready' : 'paused');
   }
 
+  // The lab keeps ownership of its camera while its covered graphics and
+  // inference loops sleep. A reply confirms the requested state was applied.
+  setLabPaused(paused, {timeoutMs = 12000} = {}) {
+    paused = !!paused;
+    if (this._renderPending?.paused === paused) return this._renderPending.promise;
+    this._settleRender(false);
+    this._renderPaused = paused;
+    const requestId = ++this._renderRequestId;
+    if (!this.active) return Promise.resolve(false);
+    let resolve;
+    const promise = new Promise(done => { resolve = done; });
+    const timer = this._window.setTimeout(() => {
+      if (this._renderPending?.requestId !== requestId) return;
+      this._settleRender(false);
+      this._notify(this.onRenderStatus, {state: 'error', paused, message: 'The tank did not confirm its rendering state. Use Reload to reconnect.'});
+    }, timeoutMs);
+    this._renderPending = {requestId, paused, promise, resolve, timer};
+    this._send('render-control', this._session.id, {paused, requestId});
+    return promise;
+  }
+
+  _settleRender(success) {
+    const pending = this._renderPending;
+    if (!pending) return;
+    this._renderPending = null;
+    this._window.clearTimeout(pending.timer);
+    pending.resolve(success);
+  }
+
+  _renderPayload() {
+    return this._renderRequestId ? {renderPaused: this._renderPaused, requestId: this._renderRequestId} : {};
+  }
+
   stop() {
+    this._settleRender(false);
+    this._renderPaused = false;
     const session = this._session;
     if (!session) return;
     this._session = null;
@@ -84,15 +121,17 @@ export class SharedHandInput {
     try { callback(...args); } catch (error) { console.warn('Shared hand input callback failed:', error); }
   }
 
-  _send(type, session) {
-    this.frame.contentWindow.postMessage({channel: CHANNEL, version: VERSION, type, session}, this.origin);
+  _send(type, session, fields = {}) {
+    this.frame.contentWindow.postMessage({channel: CHANNEL, version: VERSION, type, session, ...fields}, this.origin);
   }
 
   _current(session) { return this._session === session && !this._disposed; }
 
   _handshake() {
     if (this._disposed || this._document.hidden) return;
+    const renderPaused = this._renderPaused;
     this.stop();
+    this._renderPaused = renderPaused;
     if (this._disposed || this._document.hidden) return;
     const session = {
       id: this._window.crypto.randomUUID(), state: 'requesting', detector: new HandSweep(),
@@ -100,7 +139,7 @@ export class SharedHandInput {
     };
     this._session = session;
     session.heartbeat = this._window.setInterval(() => {
-      if (this._current(session)) this._send('heartbeat', session.id);
+      if (this._current(session)) this._send('heartbeat', session.id, this._renderPayload());
     }, HEARTBEAT_MS);
     session.staleCheck = this._window.setInterval(() => {
       if (this._current(session) && session.receivedAt !== null &&
@@ -112,7 +151,7 @@ export class SharedHandInput {
     }, 250);
     this._progress(session, 0);
     this._status(session, 'Connecting to the lab camera. Allow camera access when prompted.', 'requesting');
-    if (this._current(session)) this._send('start', session.id);
+    if (this._current(session)) this._send('start', session.id, this._renderPayload());
   }
 
   _reset(session) {
@@ -143,6 +182,15 @@ export class SharedHandInput {
       return;
     }
     if (data.session !== session.id) return;
+    if (data.type === 'render-status') {
+      if (!Number.isSafeInteger(data.requestId) || data.requestId < 1 || data.requestId !== this._renderRequestId ||
+          data.paused !== this._renderPaused || !['paused', 'ready', 'recovering', 'error'].includes(data.state) ||
+          typeof data.message !== 'string' || data.message.length > 500) return;
+      if (data.state === 'error') this._settleRender(false);
+      else if (data.state === (data.paused ? 'paused' : 'ready')) this._settleRender(true);
+      this._notify(this.onRenderStatus, {state: data.state, paused: data.paused, message: data.message});
+      return;
+    }
     if (data.type === 'status') {
       if (!STATES.has(data.state) || typeof data.message !== 'string' || data.message.length > 500) return;
       session.state = data.state;

@@ -19,6 +19,7 @@ export class WaterTank {
         stencil:false, premultipliedAlpha:false, preserveDrawingBuffer:true, powerPreference:'high-performance'});
     } catch { this.gl=null; }
     if (!this.gl) {this.fallback=new ProjectedWater(canvas);canvas.dataset.renderer='canvas-fallback';}
+    else if(needsDriverFallback(this.gl))this.useFallback('driver-compatibility');
     else {
       this.onLost=event=>{
         event.preventDefault();this.lost=true;this.ready=false;
@@ -180,15 +181,38 @@ export class WaterTank {
   }
   dispose() {
     if(this.disposed)return;this.disposed=true;
-    if(this.fallback)return this.fallback.dispose();
     this.canvas.removeEventListener('webglcontextlost',this.onLost);
     this.canvas.removeEventListener('webglcontextrestored',this.onRestored);
-    if(this.gl&&!this.lost) {
+    this.fallback?.dispose();
+    if(this.gl&&!this.lost&&!this.gl.isContextLost()) {
       for(const[type,item]of this.resources)type==='buffer'?this.gl.deleteBuffer(item):this.gl.deleteProgram(item);
       this.gl.clearColor(0,0,0,0);this.gl.clear(this.gl.COLOR_BUFFER_BIT);
+      // The finale owns this context. Hiding its canvas alone retains the GPU
+      // allocation while the embedded lab resumes. Replay uses a fresh canvas.
+      this.gl.getExtension('WEBGL_lose_context')?.loseContext();
     }
-    this.resources=[];this.particleData=null;
+    // Release the drawing buffer even when context loss happened before its
+    // event, the extension is unavailable, or the 2D fallback was being used.
+    this.canvas.width=this.canvas.height=1;
+    this.resources=[];this.particleData=this.latestFrame=null;
+    this.gl=this.fallback=null;this.ready=false;
+    this.scene=this.particles=this.quad=this.particleBuffer=null;
+    this.sceneLocations=this.particleLocations=null;
+    this.onLost=this.onRestored=null;
   }
+}
+
+function needsDriverFallback(gl) {
+  // Confirmed on Chrome/ANGLE: this driver's first water draw fails dynamic
+  // pixel-shader compilation and loses every WebGL context, including the lab.
+  // Select the existing Canvas renderer before compiling any finale shaders.
+  try {
+    const info=gl.getExtension('WEBGL_debug_renderer_info');
+    if(!info)return false;
+    const renderer=gl.getParameter(info.UNMASKED_RENDERER_WEBGL);
+    return typeof renderer==='string'&&/NVIDIA/i.test(renderer)&&
+      /GeForce\s+GT\s*730\b/i.test(renderer)&&/Direct3D11|D3D11/i.test(renderer);
+  } catch {return false;}
 }
 
 const VERTEX=`

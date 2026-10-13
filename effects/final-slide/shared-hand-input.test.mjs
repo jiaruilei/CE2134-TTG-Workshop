@@ -16,6 +16,8 @@ function harness() {
     navigator: {mediaDevices: {getUserMedia() { throw new Error('The presentation must never open a camera.'); }}},
     setInterval(fn, interval) {timers.set(++timerId, {fn, interval, next: now + interval}); return timerId;},
     clearInterval(id) {timers.delete(id);},
+    setTimeout(fn, delay) {timers.set(++timerId, {fn, once: true, next: now + delay}); return timerId;},
+    clearTimeout(id) {timers.delete(id);},
   });
   Object.assign(document, {defaultView: window, hidden: false, baseURI: 'https://jiaruilei.github.io/CE2134-TTG-Workshop/'});
   Object.assign(frame, {ownerDocument: document, contentWindow: child, dataset: {webSrc: CHILD + '/'}});
@@ -27,8 +29,11 @@ function harness() {
   };
   const advance = t => {
     now = t;
-    for (const timer of [...timers.values()]) {
-      if (timer.next <= now) {timer.next = now + timer.interval; timer.fn();}
+    for (const [id, timer] of [...timers]) {
+      if (timer.next <= now) {
+        if(timer.once) timers.delete(id); else timer.next = now + timer.interval;
+        timer.fn();
+      }
     }
   };
   return {input, frame, window, document, child, statuses, progress, messages, timers, advance, dispatch,
@@ -189,5 +194,70 @@ test('real clap landmarks from the lab trigger once and require separation after
   clap(3300); assert.equal(h.fired, 2);
   assert.equal(h.messages.filter(message => message.data.type === 'start').length, 1);
   assert.equal(h.messages.filter(message => message.data.type === 'stop').length, 0);
+  h.input.dispose();
+});
+
+test('render suspension waits for the current authenticated acknowledgement and heartbeat repeats the desired state', async () => {
+  const h = harness(); await h.input.start(); h.status();
+  const pending = h.input.setLabPaused(true);
+  const requestId = h.messages.at(-1).data.requestId;
+  assert.equal(h.messages.at(-1).data.type, 'render-control');
+  assert.equal(h.messages.at(-1).data.paused, true);
+  let settled = false; pending.then(() => {settled = true;});
+  const ack = envelope(h.session, 'render-status', {requestId, paused: true, state: 'paused', message: 'Paused'});
+  h.dispatch(ack, {origin: 'https://attacker.invalid'});
+  h.dispatch(ack, {source: {}});
+  h.dispatch({...ack, session: 'old-session'});
+  h.dispatch({...ack, requestId: requestId - 1});
+  h.dispatch({...ack, paused: false});
+  h.dispatch({...ack, state: 'ready'});
+  await Promise.resolve(); assert.equal(settled, false);
+  h.advance(2000);
+  assert.deepEqual(h.messages.at(-1).data, envelope(h.session, 'heartbeat', {requestId, renderPaused: true}));
+  h.dispatch(ack); assert.equal(await pending, true);
+  assert.equal(h.timers.size, 2, 'acknowledgement clears its timeout');
+  const resume = h.input.setLabPaused(false);
+  const nextId = h.messages.at(-1).data.requestId;
+  h.dispatch({...ack, requestId: nextId, paused: false, state: 'recovering'});
+  h.dispatch({...ack, requestId: nextId, paused: false, state: 'ready'});
+  assert.equal(await resume, true);
+  h.input.dispose();
+});
+
+test('superseding a pause cancels its wait and stale replies cannot satisfy resume', async () => {
+  const h = harness(); await h.input.start();
+  const pause = h.input.setLabPaused(true);
+  const old = h.messages.at(-1).data.requestId;
+  const resume = h.input.setLabPaused(false);
+  assert.equal(await pause, false);
+  assert.equal(h.input.setLabPaused(false), resume, 'duplicate pending request uses one wait');
+  h.dispatch(envelope(h.session, 'render-status', {requestId: old, paused: true, state: 'paused', message: 'Old'}));
+  h.dispatch(envelope(h.session, 'render-status', {requestId: old + 1, paused: false, state: 'ready', message: 'Resumed'}));
+  assert.equal(await resume, true);
+  h.input.dispose();
+});
+
+test('render timeout and child error settle safely without removing the shared camera subscription', async () => {
+  const h = harness(); await h.input.start();
+  const pause = h.input.setLabPaused(true, {timeoutMs: 500});
+  h.advance(501); assert.equal(await pause, false); assert.equal(h.input.active, true);
+  const resume = h.input.setLabPaused(false);
+  h.dispatch(envelope(h.session, 'render-status', {requestId: h.messages.at(-1).data.requestId, paused: false, state: 'error', message: 'Unable to render'}));
+  assert.equal(await resume, false);
+  h.input.dispose(); assert.equal(h.timers.size, 0);
+});
+
+test('iframe reload preserves covered state but cancels the old wait; stopping releases it', async () => {
+  const h = harness(); await h.input.start();
+  const pause = h.input.setLabPaused(true), oldSession = h.session;
+  h.frame.dispatchEvent(new Event('load'));
+  assert.equal(await pause, false);
+  assert.notEqual(h.session, oldSession);
+  assert.equal(h.messages.at(-1).data.type, 'start');
+  assert.equal(h.messages.at(-1).data.renderPaused, true);
+  const request = h.input.setLabPaused(true);
+  h.input.stop(); assert.equal(await request, false);
+  await h.input.start();
+  assert.equal(h.messages.at(-1).data.renderPaused, false);
   h.input.dispose();
 });
