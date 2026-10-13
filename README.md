@@ -2,7 +2,7 @@
 
 [Open the presentation](https://jiaruilei.github.io/CE2134-TTG-Workshop/)
 
-A 12-slide browser presentation based on the updated `CE2134_TTG.pptx`. Original slide artwork is exported directly by PowerPoint at 1920 × 1080. Slide 2 retains its two click-to-reveal steps, with both dates appearing in the final reveal. Slide 5 has a concise assignment overview using its original Arial 39-point title and 24-point text. The added slide 12 uses slide 2’s visual format to summarise past and continued AI integration into experiential learning. These presentation revisions are maintained in the browser deck; the supplied PowerPoint is not modified.
+A 12-slide browser presentation based on the updated `CE2134_TTG.pptx`. Original slide artwork is exported directly by PowerPoint at 1920 × 1080. Slide 2 retains its two click-to-reveal steps, with both dates appearing in the final reveal. Slide 5 has a concise assignment overview using its original Arial 39-point title and 24-point text. The added slide 12 uses slide 2’s visual format to summarise past and continued AI integration into experiential learning. The title page includes the original group logo and the Laboratory for Eco-hydrodynamic Interactions name from the supplied `Title page.pptx`, preserving its orange L/E/I initials. These presentation revisions are maintained in the browser deck; the supplied PowerPoint is not modified.
 
 ## Present
 
