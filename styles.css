@@ -58,8 +58,8 @@ body { background: #151e2c; color: #fff; font-family: Arial, sans-serif; }
 .reveal .cover-title-revision { background: #13294b; }
 .cover-simulation { position: absolute; left: 640px; top: 0; width: 640px; height: 720px; overflow: hidden; background: #e9eef1; }
 .cover-simulation-image { position: absolute; inset: 0; overflow: hidden; }
-/* Crop the actual application's scene pane (400,86)-(1260,622), keeping seedlings and wakes. */
-.reveal .cover-simulation-image img { position: absolute; left: -875px; top: -115.52px; width: 1719.4px; height: 967.16px; max-width: none; max-height: none; margin: 0; border: 0; }
+/* Native 3440 x 2144 canvas capture; preserve the seedling and wake framing. */
+.reveal .cover-simulation-image img { position: absolute; left: -337.7px; top: 0; width: 1155.224px; height: 720px; max-width: none; max-height: none; margin: 0; border: 0; }
 .reveal .cover-title-revision .cover-simulation-caption { position: absolute; left: 36px; top: 42px; right: 30px; color: #13294b; font-size: 36px; line-height: 1.2; font-weight: 400; }
 .reveal .cover-title-revision .cover-main-title { position: absolute; left: 69.12px; top: 48px; width: 537.6px; color: #ed7d31; font-size: 48px; line-height: 60.9px; font-weight: 400; }
 .reveal .cover-title-revision .cover-subtitle { position: absolute; left: 69.12px; top: 310px; width: 537.6px; color: #fff; font-size: 32px; line-height: 1.2; font-style: italic; font-weight: 400; }
